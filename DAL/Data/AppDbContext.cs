@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Trade_Pulse.Models.DbModels;
+﻿using DAL.Tools;
+using Microsoft.EntityFrameworkCore;
 
-namespace Trade_Pulse.Data
+namespace DAL.Data
 {
 	public class AppDbContext : DbContext
 	{

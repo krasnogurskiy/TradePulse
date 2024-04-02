@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Trade_Pulse.Data;
+﻿using DAL.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Trade_Pulse.Helpers
 {
@@ -7,10 +7,7 @@ namespace Trade_Pulse.Helpers
 	{
 		public static void InitDb(this WebApplicationBuilder builder)
 		{
-			builder.Services.AddDbContext<AppDbContext>(options =>
-			{
-				options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-			});
+			builder.Services.InitDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 		}
 	}
 }

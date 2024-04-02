@@ -1,6 +1,6 @@
-﻿namespace Trade_Pulse.Models.DbModels
+﻿namespace DAL.Tools
 {
-    public class User
+	public class User
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;

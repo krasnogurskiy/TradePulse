@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Trade_Pulse.Models.DbModels
+namespace DAL.Tools
 {
 	[Keyless]
 	public class OrderProduct

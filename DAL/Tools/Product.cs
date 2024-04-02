@@ -1,4 +1,4 @@
-﻿namespace Trade_Pulse.Models.DbModels
+﻿namespace DAL.Tools
 {
 	public class Product
 	{

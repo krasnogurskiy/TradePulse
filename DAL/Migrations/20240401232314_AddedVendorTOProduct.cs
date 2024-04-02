@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Trade_Pulse.Migrations
+namespace DAL.Migrations
 {
     /// <inheritdoc />
     public partial class AddedVendorTOProduct : Migration

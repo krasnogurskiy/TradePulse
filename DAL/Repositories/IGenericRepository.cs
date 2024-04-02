@@ -1,4 +1,4 @@
-﻿namespace Trade_Pulse.Services.GenericRepository
+﻿namespace DAL.Repositories
 {
 	public interface IGenericRepository<T>
 	{
