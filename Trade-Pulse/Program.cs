@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.InitDb();
+builder.InitRepositories();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())

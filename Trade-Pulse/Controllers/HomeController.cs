@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DAL.Data;
+using DAL.Repositories.Interfaces;
+using DAL.Tools;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Trade_Pulse.Models;
 
