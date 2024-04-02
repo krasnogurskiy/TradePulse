@@ -1,4 +1,6 @@
 ﻿using DAL.Helpers;
+using DAL.Repositories;
+using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Trade_Pulse.Helpers
@@ -9,6 +11,12 @@ namespace Trade_Pulse.Helpers
 		{
 			builder.Services.InitDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 		}
+		public static void InitRepositories(this WebApplicationBuilder builder)
+		{
+			builder.Services.AddScoped<IUserRepository, UserRepository>();
+			builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+		}
+
 		public static void InitIdentity(this WebApplicationBuilder builder)
 		{
 			builder.Services.AddAppIdentity();
