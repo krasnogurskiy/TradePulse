@@ -9,5 +9,9 @@ namespace Trade_Pulse.Helpers
 		{
 			builder.Services.InitDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 		}
+		public static void InitIdentity(this WebApplicationBuilder builder)
+		{
+			builder.Services.AddAppIdentity();
+		}
 	}
 }

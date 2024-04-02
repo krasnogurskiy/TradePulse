@@ -1,8 +1,8 @@
-﻿namespace DAL.Tools
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace DAL.Tools
 {
-	public class Role
+	public class Role : IdentityRole<int>
 	{
-		public int Id { get; set; }
-		public string Title { get; set; } = null!;
 	}
 }
