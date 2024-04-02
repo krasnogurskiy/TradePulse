@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.InitDb();
 builder.InitIdentity();
+builder.InitRepositories();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())

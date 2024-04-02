@@ -1,24 +1,24 @@
-﻿using DAL.Data;
-using DAL.Repositories.Interfaces;
+﻿using DAL.Repositories.Interfaces;
 using DAL.Tools;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
 	public class RoleRepository : IRoleRepository
 	{
-		private readonly AppDbContext _context;
-		public RoleRepository(AppDbContext context)
+		private readonly RoleManager<Role> _roleManager;
+		public RoleRepository(RoleManager<Role> roleManager)
 		{
-			_context = context;
+			_roleManager = roleManager;
 		}
 		public Task<List<Role>> GetAllAllowedRolesAsync() =>
-			_context.Roles.Where(r => r.Title != "Admin").ToListAsync();
+			_roleManager.Roles.Where(r => r.Name != "Admin").ToListAsync();
 
 		public Task<Role?> GetByIdAsync(int id) =>
-			_context.Roles.FirstOrDefaultAsync(r => r.Id == id);
+			_roleManager.FindByIdAsync(id.ToString());
 
 		public Task<Role?> GetByTitleAsync(string title) =>
-			_context.Roles.FirstOrDefaultAsync(r => r.Title == "title");
+			_roleManager.FindByNameAsync(title);
 	}
 }
