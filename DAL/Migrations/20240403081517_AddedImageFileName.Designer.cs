@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240402163455_AddedImagePathToCategories")]
-    partial class AddedImagePathToCategories
+    [Migration("20240403081517_AddedImageFileName")]
+    partial class AddedImageFileName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
