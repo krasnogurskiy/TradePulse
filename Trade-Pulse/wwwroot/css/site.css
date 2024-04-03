@@ -18,5 +18,150 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    padding:0;
 }
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+section.welc {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    background-color: #D1D8E5;
+    padding: 50px 0 50px 0;
+}
+
+    section.welc img {
+        width: 650px;
+        align-self: start;
+    }
+
+.w_info {
+    width: 35vw;
+}
+
+section.welc h1 {
+    font-size: 42px;
+    color: #333;
+    text-align: left;
+}
+
+section.welc p {
+    font-size: 28px;
+    color: #666;
+    text-align: left;
+    width: 80%;
+}
+
+section.welc .but_avt button {
+    padding: 10px 20px;
+    border-radius: 7px;
+    margin: 0 10px;
+    border: none;
+    background-color: #5A65C8;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+    section.welc .but_avt button:hover {
+        background-color: #784cac;
+    }
+
+section.sh_info {
+    background-color: #C4D0E8;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+    section.sh_info h1 {
+        font-size: 36px;
+        color: #333;
+        margin: 24px 0 40px;
+    }
+
+    section.sh_info p {
+        font-size: 24px;
+        color: #666;
+        padding: 0 20%;
+        text-align: center;
+    }
+
+section.drop_work {
+    background-color: #D1D8E5;
+    padding: 40px 0;
+    text-align: center;
+}
+
+    section.drop_work h1 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 50px;
+    }
+
+#box_container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.box_work {
+    text-align: center;
+    width: 200px;
+}
+
+    .box_work img {
+        width: 100px;
+    }
+
+#order {
+    width: 150px;
+}
+
+.box_work p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+    .box_work p.step {
+        font-size: 28px;
+    }
+
+    .box_work p.work_info {
+        font-size: 20px;
+    }
+
+.work_start {
+    text-align: center;
+    background-color: #C4D0E8;
+    padding: 40px 0;
+}
+
+    .work_start h1 {
+        font-size: 36px;
+        color: #333;
+    }
+
+    .work_start ul {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 70px;
+        padding: 10px;
+    }
+
+    .work_start li {
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        font-size: 20px;
+    }
+
+        .work_start li:nth-child(even) {
+            background-color: #e9e9e9;
+        }
