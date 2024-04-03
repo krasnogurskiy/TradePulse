@@ -6,7 +6,7 @@ namespace DAL.Data
 {
 	public class AppDbContext : IdentityDbContext<User, Role, int>
 	{
-		public AppDbContext() : base()
+        public AppDbContext() : base()
 		{
 		}
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)

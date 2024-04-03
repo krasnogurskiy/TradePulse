@@ -9,7 +9,6 @@ namespace DAL.Helpers
 		public static void AddAppIdentity(this IServiceCollection services)
 		{
 			services.AddIdentityCore<User>(options =>
-			//services.AddIdentityCore<User>(options =>
 			{
 				options.Password.RequireDigit = true;
 				options.Password.RequireLowercase = true;

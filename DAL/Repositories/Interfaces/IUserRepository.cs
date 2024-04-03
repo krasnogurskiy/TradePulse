@@ -11,5 +11,6 @@ namespace DAL.Repositories.Interfaces
 		public Task<bool> ComparePasswordsAsync(User user, string password);
 		public Task AddToRoleAsync(User user, string role);
 		public Task<bool> IsInRoleAsync(User user, string role);
-	}
+		public Task UpdateSecurityStampAsync(User user);
+    }
 }

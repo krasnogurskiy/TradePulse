@@ -7,11 +7,14 @@ builder.Services.AddControllersWithViews();
 builder.InitDb();
 builder.InitIdentity();
 builder.InitRepositories();
+builder.InitServices();
+builder.InitCookies();
+builder.InitAuthentication();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Home/Error");
+	app.UseExceptionHandler("/Error");
 }
 app.UseStaticFiles();
 app.UseRouting();
