@@ -1,4 +1,4 @@
-using Trade_Pulse.Helpers;
+﻿using Trade_Pulse.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
