@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Trade_Pulse.Models;
 
 namespace Trade_Pulse.Controllers
 {
