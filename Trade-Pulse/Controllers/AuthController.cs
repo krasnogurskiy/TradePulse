@@ -26,16 +26,15 @@ namespace Trade_Pulse.Controllers
         {
             if (!ModelState.IsValid) return View(loginDto);
 
-            var result = await _authService.Login(loginDto);
+            var result = await _authService.LoginAsync(loginDto);
             if (result.IsFailure || result.Value == null)
             {
                 TempData["Error"] = result.Error!.Message;
                 return View(loginDto);
             }
             var user = result.Value;
-            user.UserName = user.Email;
 
-            await _signInManager.SignInAsync(user, false);
+            await _signInManager.SignInAsync(user, true);
             return RedirectToAction("Index", "Home");
         }
     }

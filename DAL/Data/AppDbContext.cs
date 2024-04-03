@@ -25,8 +25,6 @@ namespace DAL.Data
 			base.OnModelCreating(modelBuilder);
 
 			modelBuilder.Entity<User>()
-				.Ignore(c => c.UserName)
-				.Ignore(c => c.NormalizedUserName)
 				.Ignore(c => c.LockoutEnabled)
 				.Ignore(c => c.LockoutEnd)
 				.Ignore(c => c.AccessFailedCount).ToTable("Users");
