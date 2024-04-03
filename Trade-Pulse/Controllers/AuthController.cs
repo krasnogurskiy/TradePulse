@@ -21,6 +21,23 @@ namespace Trade_Pulse.Controllers
             return View("Login");
         }
 
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(SignUpDto signUpDto)
+        {
+            if (!ModelState.IsValid) return View(signUpDto);
+            var result = await _authService.SignUpAsync(signUpDto);
+            if (result.IsFailure)
+            {
+                TempData["Error"] = result.Error!.Message;
+                return View(signUpDto);
+            }
+            return RedirectToAction("Index", "Auth");
+        }
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {

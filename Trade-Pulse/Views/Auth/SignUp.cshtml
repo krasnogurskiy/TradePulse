@@ -1,0 +1,72 @@
+﻿@{
+    @using BLL.DTOs
+    @model SignUpDto
+    ViewData["Title"] = "Sign up";
+}
+
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <p>
+            <h4>Створити акаунт</h4>
+            </p>
+
+        @if (TempData["Error"] != null)
+        {
+                <div class="col-md-12 alert alert-danger">
+                    <span><b>Помилка: </b> - @TempData["Error"] </span>
+                </div>
+        }
+
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <form asp-action="SignUp">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                         <div class="form-group">
+                            <label asp-for="BirthDate" class="control-label"></label>
+                            <input asp-for="BirthDate" class="form-control" placeholder="dd/mm/yy"/>
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                         </div>
+                        <div class="form-group">
+                            <label asp-for="Role" class="control-label"></label>
+                             <select asp-for="Role" class="form-control form-control-md">
+                                <option>Постачальник</option>
+                                <option>Роздрібний покупець</option>
+                             </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                         <div class="form-group mt-5">
+                            <input class="btn btn-outline-success float-right" type="submit" value="Зареєструватись" />
+                            <a class="btn btn-outline-secondary" asp-controller="Auth" asp-action="Index">Скасувати</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

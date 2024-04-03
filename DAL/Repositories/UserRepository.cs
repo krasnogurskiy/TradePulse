@@ -22,8 +22,8 @@ namespace DAL.Repositories
         public Task<User?> GetByEmailAsync(string email) =>
             _userManager.FindByEmailAsync(email);
 
-        public Task CreateUserAsync(User user) =>
-         _userManager.CreateAsync(user);
+        public Task<IdentityResult> CreateUserAsync(User user, string password) =>
+         _userManager.CreateAsync(user, password);
 
         public Task<bool> ComparePasswordsAsync(User user, string password) =>
             _userManager.CheckPasswordAsync(user, password);

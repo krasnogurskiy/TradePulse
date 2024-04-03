@@ -7,5 +7,6 @@ namespace BLL.Services.Interfaces
     public interface IAuthService
     {
         public Task<ServiceResult<User>> LoginAsync(LoginDto loginDto);
+        public Task<ServiceResult<SignUpDto>> SignUpAsync(SignUpDto signUpDto);
     }
 }
