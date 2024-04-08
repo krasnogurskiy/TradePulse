@@ -12,11 +12,10 @@
 
         @if (TempData["Error"] != null)
         {
-                <div class="col-md-12 alert alert-danger">
-                    <span><b>Помилка: </b> - @TempData["Error"] </span>
-                </div>
+                    <div class="col-md-12 alert alert-danger">
+                        <span><b>Помилка: </b> - @TempData["Error"] </span>
+                    </div>
         }
-
             <div class="row">
                 <div class="col-md-8 offset-2">
                     <form asp-action="SignUp">
@@ -49,7 +48,10 @@
                         </div>
                          <div class="form-group">
                             <label asp-for="BirthDate" class="control-label"></label>
-                            <input asp-for="BirthDate" class="form-control" placeholder="dd/mm/yy"/>
+                            <input id="datepicker"  asp-for="BirthDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                            @* <span class="input-group-addon"> *@
+                                @* <span class="glyphicon glyphicon-calendar"></span> *@
+                            @* </span> *@
                             <span asp-validation-for="BirthDate" class="text-danger"></span>
                          </div>
                         <div class="form-group">
@@ -70,3 +72,24 @@
         </div>
     </div>
 
+@section Scripts {
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            @* <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> *@
+
+
+         <script>
+            $(function () {
+                    $('#datepicker').datepicker({
+                    dateFormat: "yy/mm/dd",
+                    showOtherMonths: true,
+                    selectOtherMonths: true,
+                    showButtonPanel: true,
+                    changeMonth: true,
+                    changeYear: true,
+                    gotoCurrent: true,
+                }).datepicker("setDate", new Date());
+            });
+        </script>
+}
