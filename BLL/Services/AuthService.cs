@@ -4,7 +4,6 @@ using BLL.Features;
 using BLL.Services.Interfaces;
 using DAL.Repositories.Interfaces;
 using DAL.Tools;
-using Microsoft.AspNetCore.Identity;
 
 namespace BLL.Services
 {
@@ -56,6 +55,5 @@ namespace BLL.Services
 
             return signUpDto;
         }
-
     }
 }

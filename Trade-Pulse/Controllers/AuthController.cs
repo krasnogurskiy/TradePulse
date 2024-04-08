@@ -52,7 +52,7 @@ namespace Trade_Pulse.Controllers
             var user = result.Value;
 
             await _signInManager.SignInAsync(user, true);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Category");
         }
     }
 }
