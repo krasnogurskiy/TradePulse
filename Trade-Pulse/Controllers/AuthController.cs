@@ -54,5 +54,11 @@ namespace Trade_Pulse.Controllers
             await _signInManager.SignInAsync(user, true);
             return RedirectToAction("Index", "Category");
         }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
