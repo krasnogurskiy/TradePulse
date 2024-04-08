@@ -1,0 +1,80 @@
+﻿@{
+    @using BLL.DTOs;
+    @model UpdateUserDto;
+
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+        <h4>Редагувати профіль</h4>
+        </p>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Помилка: </b> - @TempData["Error"] </span>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-controller="Auth" asp-action="Update" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label"></label>
+                        <input id="datepicker" asp-for="BirthDate" class="form-control"
+                            value="@Model.BirthDate.ToLocalTime().ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @* <label asp-for="Role" class="control-label"></label>
+                        <select asp-for="Role" class="form-control form-control-md">
+                        <option>Постачальник</option>
+                        <option>Роздрібний покупець</option>
+                        </select> *@
+                        <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
+                        @* <input asp-for="Id" value="@Model.Id" class="d-none"/> *@
+                    </div>
+                    <div class="form-group mt-5">
+                        <input class="btn btn-outline-success float-right" type="submit" value="Редагувати" formaction="/Auth/Update"/>
+                        <input type="submit" value="Видалити профіль" class="btn btn-danger float-right" formaction="/Auth/Delete"/>
+                    </div>
+                </form>
+                @* <form method="post" asp-controller="Auth" asp-action="Delete" class="mt-1">
+                </form> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    @* <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> *@
+
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                dateFormat: "yy/mm/dd",
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                gotoCurrent: true,
+            }).datepicker("setDate", new Date());
+        });
+    </script>
+}

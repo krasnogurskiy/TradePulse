@@ -54,5 +54,27 @@ namespace BLL.Services
 
             return signUpDto;
         }
+
+        public async Task<ServiceResult<UpdateUserDto>> UpdateUserAsync(UpdateUserDto updateUserData)
+        {
+            var user = await _userRepository.GetByIdAsync(updateUserData.Id);
+            if (user == null) return new NotFoundError("Користувача не знайдено");
+
+            user.FirstName = updateUserData.FirstName;
+            user.LastName = updateUserData.LastName;
+            user.BirthDate = updateUserData.BirthDate.ToUniversalTime();
+          
+            await _userRepository.UpdateUserAsync(user);
+            return updateUserData;
+        }
+
+        public async Task<ServiceResult<int>> DeleteUserAsync(int userId)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null) return new NotFoundError("Користувача не знайдено");
+            await _userRepository.DeleteUserAsync(user);
+
+            return 0;
+        }
     }
 }
