@@ -21,9 +21,9 @@
                         <div class="card-body">
                             <p class="card-text">@item.Title</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Переглянути</button>
-                                </div>
+	                            <div class="btn-group">
+		                            <a type="btn btn-success" asp-controller="Product" asp-action="Product" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Переглянути продукти</a>
+	                            </div>
                             </div>
                         </div>
                     </div>
