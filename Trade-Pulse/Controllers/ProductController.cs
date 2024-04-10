@@ -21,17 +21,22 @@ namespace Trade_Pulse.Controllers
             return View();
         }
 
-        [HttpPost]
+                [HttpPost]
         public async Task<IActionResult> Create(ProductDto productDto)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) return View(productDto);
+
+
+            var result = await _productService.AddProductAsync(productDto);
+            if (result.IsFailure)
             {
+                TempData["Error"] = result.Error!.Message;
                 return View(productDto);
             }
 
-            await _productService.AddProductAsync(productDto);
-
             return RedirectToAction("Index", "Home");
         }
+
+
     }
 }

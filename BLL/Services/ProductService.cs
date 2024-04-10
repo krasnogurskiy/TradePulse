@@ -16,10 +16,39 @@ namespace BLL.Services
             _productRepository = productRepository;
         }
 
-        public void AddProduct(Product product)
+
+        //public async Task AddProductAsync(ProductDto productDto)
+        //{
+        //    await _productRepository.AddAsync(productDto);
+        //    await _productRepository.SaveChangesAsync();
+        //}
+
+        public async Task<ServiceResult<ProductDto>> AddProductAsync(ProductDto productDto)
         {
-            _productRepository.Add(product);
-            _productRepository.SaveChanges();
+            try
+            {
+                // Створити об'єкт Product з даних DTO
+                var product = new Product
+                {
+                    Name = productDto.Name,
+                    Price = productDto.Price,
+                    Quantity = productDto.Quantity
+                    // Додаткові поля, якщо такі є
+                };
+
+                // Зберегти продукт за допомогою репозиторію
+                _productRepository.Add(product);
+                _productRepository.SaveChanges();
+
+                // Повернути успішний результат разом з даними про збережений продукт
+                return ServiceResult<ProductDto>.Success(productDto);
+                //return productDto;
+            }
+            catch (Exception ex)
+            {
+                // Обробити помилку та повернути її у вигляді результату
+                return ServiceResult<ProductDto>.Failure($"Failed to add product: {ex.Message}");
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ namespace BLL.Services.Interfaces
 {
     public interface IProductService
     {
-        void AddProduct(Product product);
+        //public Task AddProductAsync(ProductDto productDto);
+        Task<ServiceResult<ProductDto>> AddProductAsync(ProductDto productDto);;
+
     }
 }
