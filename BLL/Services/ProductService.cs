@@ -30,9 +30,9 @@ namespace BLL.Services
                 // Створити об'єкт Product з даних DTO
                 var product = new Product
                 {
-                    Name = productDto.Name,
+                    Title = productDto.Title,
                     Price = productDto.Price,
-                    Quantity = productDto.Quantity
+                    ItemsAvailable = productDto.ItemsAvailable
                     // Додаткові поля, якщо такі є
                 };
 
