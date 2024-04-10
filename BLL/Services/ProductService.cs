@@ -27,27 +27,23 @@ namespace BLL.Services
         {
             try
             {
-                // Створити об'єкт Product з даних DTO
                 var product = new Product
                 {
                     Title = productDto.Title,
                     Price = productDto.Price,
                     ItemsAvailable = productDto.ItemsAvailable
-                    // Додаткові поля, якщо такі є
                 };
 
-                // Зберегти продукт за допомогою репозиторію
                 _productRepository.Add(product);
                 _productRepository.SaveChanges();
 
-                // Повернути успішний результат разом з даними про збережений продукт
-                return ServiceResult<ProductDto>.Success(productDto);
-                //return productDto;
+                //return ServiceResult<ProductDto>.Success(productDto);
+                return productDto;
             }
             catch (Exception ex)
             {
-                // Обробити помилку та повернути її у вигляді результату
-                return ServiceResult<ProductDto>.Failure($"Failed to add product: {ex.Message}");
+                return ServiceResult<ProductDto>.Failure(new ModelError($"Failed to add product: {ex.Message}"));
+
             }
         }
     }
