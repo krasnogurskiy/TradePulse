@@ -27,9 +27,10 @@ namespace DAL.Repositories
             _context.Products.Add(product);
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
+
     }
 }

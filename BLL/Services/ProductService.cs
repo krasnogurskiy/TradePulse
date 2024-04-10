@@ -35,7 +35,7 @@ namespace BLL.Services
                 };
 
                 _productRepository.Add(product);
-                _productRepository.SaveChanges();
+                 _productRepository.SaveChangesAsync();
 
                 //return ServiceResult<ProductDto>.Success(productDto);
                 return productDto;

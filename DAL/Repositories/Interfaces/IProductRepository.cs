@@ -9,6 +9,6 @@ namespace DAL.Repositories.Interfaces
         Task<List<Product>> GetAllAsync();
         Task<Product?> GetByIdAsync(int id);
         void Add(Product product);
-        void SaveChanges();
+        Task SaveChangesAsync();
     }
 }

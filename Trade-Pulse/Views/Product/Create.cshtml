@@ -8,11 +8,11 @@
 
 <form asp-action="Create" method="post">
     <div class="form-group">
-        <label asp-for="Name">Назва:</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="Title">Назва:</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label asp-for="Description">Опис:</label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
@@ -20,7 +20,7 @@
     <div class="form-group">
         <label asp-for="Model">Модель:</label>
         <input asp-for="Model" class="form-control" />
-    </div>
+    </div>*@
     <div class="form-group">
         <label asp-for="Price">Ціна:</label>
         <input asp-for="Price" class="form-control" />
