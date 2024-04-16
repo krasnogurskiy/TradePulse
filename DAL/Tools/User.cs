@@ -11,5 +11,6 @@ namespace DAL.Tools
 		public List<Order>? Orders { get; set; }
 		public List<Product>? Products { get; set; }
 		public Subscription? Subscription { get; set; } = null!;
+		public Cart Cart { get; set; } = null!;
 	}
 }

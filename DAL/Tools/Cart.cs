@@ -4,9 +4,8 @@ namespace DAL.Tools
 
     public class Cart
     {
-        public int ProductId { get; set; }
-        public string ProductTitle { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
+        public int Id { get; set; }
+        public User User { get; set; } = null!;
+        public int UserId { get; set; }
     }
 }

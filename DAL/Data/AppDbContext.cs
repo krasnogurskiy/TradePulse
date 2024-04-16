@@ -19,6 +19,8 @@ namespace DAL.Data
 		public DbSet<Payment> Payments { get; set; }
 		public DbSet<Subscription> Subscriptions { get; set; }
 		public DbSet<Category> Categories { get; set; }
+		public DbSet<Cart> Carts { get; set; }
+		public DbSet<CartProduct> CartsProducts { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
