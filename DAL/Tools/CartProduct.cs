@@ -6,7 +6,7 @@ namespace DAL.Tools
     public class CartProduct
     {
         public Cart Cart { get; set; } = null!;
-        public Cart Product { get; set; } = null!;
+        public Product Product { get; set; } = null!;
         public uint ItemsCount { get; set; }
     }
 }
