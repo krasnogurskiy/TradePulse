@@ -45,5 +45,20 @@ namespace BLL.Services
                 return ServiceResult<ProductDto>.Failure(new ModelError($"Failed to add product: {ex.Message}"));
             }
         }
+
+        public Task<List<Product>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Product>> GetAllByCategoryAsync(int category_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Product?> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
