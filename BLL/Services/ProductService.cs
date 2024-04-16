@@ -1,9 +1,10 @@
 ﻿using BLL.DTOs;
 using BLL.Errors;
-using BLL.Features;
 using BLL.Services.Interfaces;
 using DAL.Repositories.Interfaces;
 using DAL.Tools;
+using System;
+using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -16,26 +17,27 @@ namespace BLL.Services
             _productRepository = productRepository;
         }
 
-
-        //public async Task AddProductAsync(ProductDto productDto)
-        //{
-        //    await _productRepository.AddAsync(productDto);
-        //    await _productRepository.SaveChangesAsync();
-        //}
-
         public async Task<ServiceResult<ProductDto>> AddProductAsync(ProductDto productDto)
         {
             try
             {
                 var product = new Product
                 {
+                    CategoryId = productDto.CategoryId,
                     Title = productDto.Title,
+                    Description = productDto.Description,
+                    Model = productDto.Model,
                     Price = productDto.Price,
-                    ItemsAvailable = productDto.ItemsAvailable
+                    ItemsAvailable = productDto.ItemsAvailable,
+                    CreatedAt = DateTime.Now, 
+                    VendorId = productDto.VendorId 
                 };
 
                 _productRepository.Add(product);
-                 _productRepository.SaveChangesAsync();
+                _productRepository.SaveChangesAsync();
+                //await _productRepository.SaveChangesAsync();
+
+    
 
                 //return ServiceResult<ProductDto>.Success(productDto);
                 return productDto;
@@ -43,7 +45,6 @@ namespace BLL.Services
             catch (Exception ex)
             {
                 return ServiceResult<ProductDto>.Failure(new ModelError($"Failed to add product: {ex.Message}"));
-
             }
         }
     }

@@ -12,7 +12,7 @@
         <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-    @*<div class="form-group">
+    <div class="form-group">
         <label asp-for="Description">Опис:</label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
@@ -20,7 +20,8 @@
     <div class="form-group">
         <label asp-for="Model">Модель:</label>
         <input asp-for="Model" class="form-control" />
-    </div>*@
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="Price">Ціна:</label>
         <input asp-for="Price" class="form-control" />
@@ -30,6 +31,11 @@
         <label asp-for="ItemsAvailable">Кількість товару:</label>
         <input asp-for="ItemsAvailable" class="form-control" />
         <span asp-validation-for="ItemsAvailable" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">Ідентифікатор категорії:</label>
+        <input asp-for="CategoryId" class="form-control" />
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Зберегти</button>
 </form>
