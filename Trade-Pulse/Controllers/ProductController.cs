@@ -1,31 +1,39 @@
 ﻿using BLL.DTOs;
 using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using DAL.Tools;
-
+using Microsoft.AspNetCore.Authorization;
+using DAL.Repositories.Interfaces;
+using System.Security.Claims;
 
 namespace Trade_Pulse.Controllers
 {
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, ICategoryRepository categoryRepository)
         {
             _productService = productService;
+            _categoryRepository = categoryRepository;
         }
 
-        public IActionResult Create()
+        [Authorize(Roles = "Постачальник")]
+        //[Authorize]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var categories = await _categoryRepository.GetAllAsync();
+            var model = new ProductDto() { Categories = categories.ToArray() };
+            return View(model);
         }
 
-                [HttpPost]
+        [Authorize(Roles = "Постачальник")]
+        [HttpPost]
         public async Task<IActionResult> Create(ProductDto productDto)
         {
+            var id = int.Parse(this.User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            productDto.VendorId = id;
             if (!ModelState.IsValid) return View(productDto);
-
 
             var result = await _productService.AddProductAsync(productDto);
             if (result.IsFailure)

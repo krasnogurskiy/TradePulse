@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using DAL.Tools;
+﻿using DAL.Tools;
 
 namespace DAL.Repositories.Interfaces
 {
     public interface IProductRepository
     {
-        Task<List<Product>> GetAllAsync();
-        Task<Product?> GetByIdAsync(int id);
-        void Add(Product product);
-        Task SaveChangesAsync();
+        public Task<List<Product>> GetAllAsync();
+        public Task<Product?> GetByIdAsync(int id);
+        public Task Add(Product product, int vendorId, int categoryId);
+        public Task SaveChangesAsync();
     }
 }
