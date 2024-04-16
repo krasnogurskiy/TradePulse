@@ -15,18 +15,12 @@ namespace Trade_Pulse.Controllers
         {
             _categoryService = categoryService;
         }
-        //private readonly AppDbContext _context;
-        //public CategoryController(AppDbContext context)
-        //{
-        //    _context = context;
-        //}
+
         [Authorize]
         public IActionResult Index()
         {
 	        List<Category> categories = _categoryService.GetAllAsync().Result;
 	        return View(categories);
-            //List<Category> categories = _context.Categories.ToList(); ;
-            //return View(categories);
         }
     }
 }
