@@ -19,6 +19,7 @@ namespace Trade_Pulse.Helpers
         public static void InitRepositories(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -33,7 +34,7 @@ namespace Trade_Pulse.Helpers
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 8;
-            }).AddErrorDescriber<CustomIdentityErrorDescriber>().AddEntityFrameworkStores<AppDbContext>();
+            }).AddErrorDescriber<CustomIdentityErrorDescriber>().AddEntityFrameworkStores<AppDbContext>().AddRoles<Role>();
         }
 
         public static void InitServices(this WebApplicationBuilder builder)

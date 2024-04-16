@@ -1,6 +1,8 @@
 ﻿@{
     @using BLL.DTOs
+    @using DAL.Tools
     @model ProductDto
+    // @model ProductDto
 
 }
 
@@ -12,15 +14,16 @@
         <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-    @*<div class="form-group">
+    <div class="form-group">
         <label asp-for="Description">Опис:</label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Model">Модель:</label>
-        <input asp-for="Model" class="form-control" />
-    </div>*@
+        <input asp-for="Model" class="form-control" value="Default" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="Price">Ціна:</label>
         <input asp-for="Price" class="form-control" />
@@ -31,5 +34,21 @@
         <input asp-for="ItemsAvailable" class="form-control" />
         <span asp-validation-for="ItemsAvailable" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="ItemsAvailable">Категорія:</label>
+        <select asp-for="CategoryId" class="form-control form-control-md">
+            @for (int i = 0; i < Model.Categories.Length; ++i)
+            {
+                <option value="@Model.Categories[i].Id">@Model.Categories[i].Title</option>
+            }
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
     <button type="submit" class="btn btn-primary">Зберегти</button>
+    <div style="display: none">
+        @for (int i = 0; i < Model.Categories.Length; ++i)
+        {
+            @Html.EditorFor(m => m.Categories[i])
+        }
+    </div>
 </form>
