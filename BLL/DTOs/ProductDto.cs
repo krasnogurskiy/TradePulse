@@ -1,9 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DAL.Tools;
+using System.ComponentModel.DataAnnotations;
 
 namespace BLL.DTOs
 {
-    public class ProductDto
-    {
+	public class ProductDto
+	{
+		//Юра
+		public ProductDto(Product product)
+		{
+			Id = product.Id;
+			Title = product.Title;
+		}
+		public int Id { get; set; }
+		public Category Category { get; set; }
+
+		//Андрій
         [Required(ErrorMessage = "Поле 'Назва товару' є обов'язковим")]
         public string Title { get; set; }
 
@@ -15,5 +26,5 @@ namespace BLL.DTOs
         [Range(1, int.MaxValue, ErrorMessage = "Кількість повинна бути більше 0")]
         public uint ItemsAvailable { get; set; }
 
-    }
+	}
 }

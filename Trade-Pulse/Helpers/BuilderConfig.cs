@@ -20,6 +20,7 @@ namespace Trade_Pulse.Helpers
         {
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
         }
 
@@ -38,9 +39,9 @@ namespace Trade_Pulse.Helpers
         public static void InitServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
         }
-
 
         public static void InitCookies(this WebApplicationBuilder builder)
         {

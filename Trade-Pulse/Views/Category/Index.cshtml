@@ -15,21 +15,21 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" data-src=@item.ImageFileName alt=@item.Title>
-                            <div class="card-body">
-                                <p class="card-text">@item.Title</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Переглянути</button>
-                                    </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="~/img/@item.ImageFileName" alt=@item.Title>
+                        <div class="card-body">
+                            <p class="card-text">@item.Title</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="btn btn-success" asp-controller="Product" asp-action="Product" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Переглянути продукти</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             }
 
-         </div>
+        </div>
     </div>
 </div>
