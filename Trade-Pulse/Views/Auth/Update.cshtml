@@ -1,13 +1,13 @@
 ﻿@{
-    @using BLL.DTOs
-    @model SignUpDto
-    ViewData["Title"] = "Sign up";
+    @using BLL.DTOs;
+    @model UpdateUserDto;
+
 }
 
 <div class="row">
     <div class="col-md-6 offset-3">
         <p>
-        <h4>Створити акаунт</h4>
+        <h4>Редагувати профіль</h4>
         </p>
 
         @if (TempData["Error"] != null)
@@ -18,14 +18,8 @@
         }
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="SignUp">
+                <form asp-controller="Auth" asp-action="Update" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
                     <div class="form-group">
                         <label asp-for="FirstName" class="control-label"></label>
                         <input asp-for="FirstName" class="form-control" />
@@ -37,37 +31,27 @@
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfirmPassword" class="control-label"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
                         <label asp-for="BirthDate" class="control-label"></label>
                         <input id="datepicker" asp-for="BirthDate" class="form-control"
-                            value="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                        @* <span class="input-group-addon"> *@
-                        @* <span class="glyphicon glyphicon-calendar"></span> *@
-                        @* </span> *@
+                            value="@Model.BirthDate.ToLocalTime().ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="BirthDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Role" class="control-label"></label>
+                        @* <label asp-for="Role" class="control-label"></label>
                         <select asp-for="Role" class="form-control form-control-md">
-                            <option>Постачальник</option>
-                            <option>Роздрібний покупець</option>
-                        </select>
-                        <span asp-validation-for="Role" class="text-danger"></span>
+                        <option>Постачальник</option>
+                        <option>Роздрібний покупець</option>
+                        </select> *@
+                        <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
+                        @* <input asp-for="Id" value="@Model.Id" class="d-none"/> *@
                     </div>
                     <div class="form-group mt-5">
-                        <input class="btn btn-outline-success float-right" type="submit" value="Зареєструватись" />
-                        <a class="btn btn-outline-secondary" asp-controller="Auth" asp-action="Index">Скасувати</a>
+                        <input class="btn btn-outline-success float-right" type="submit" value="Редагувати" formaction="/Auth/Update"/>
+                        <input type="submit" value="Видалити профіль" class="btn btn-danger float-right" formaction="/Auth/Delete"/>
                     </div>
                 </form>
+                @* <form method="post" asp-controller="Auth" asp-action="Delete" class="mt-1">
+                </form> *@
             </div>
         </div>
     </div>

@@ -36,5 +36,11 @@ namespace DAL.Repositories
 
         public Task UpdateSecurityStampAsync(User user) =>
             _userManager.UpdateSecurityStampAsync(user);
+
+        public Task UpdateUserAsync(User user) =>
+            _userManager.UpdateAsync(user);
+
+        public Task DeleteUserAsync(User user) =>
+            _userManager.DeleteAsync(user);
     }
 }

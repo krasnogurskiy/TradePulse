@@ -21,7 +21,8 @@ namespace BLL.DTOs
 
         [Required(ErrorMessage = "Обов'язкове поле")]
         [DisplayName("Дата народження")]
-        public string BirthDate { get; set; } = "dd/mm/yy";
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; } 
         [Required(ErrorMessage = "Обов'язкове поле")]
         [DataType(DataType.Password)]
         [DisplayName("Пароль")]

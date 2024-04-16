@@ -13,5 +13,7 @@ namespace DAL.Repositories.Interfaces
         public Task AddToRoleAsync(User user, string role);
         public Task<bool> IsInRoleAsync(User user, string role);
         public Task UpdateSecurityStampAsync(User user);
+        public Task UpdateUserAsync(User user);
+        public Task DeleteUserAsync(User user);
     }
 }

@@ -30,11 +30,10 @@ namespace BLL.Services
 
         public async Task<ServiceResult<SignUpDto>> SignUpAsync(SignUpDto signUpDto)
         {
-            bool isParsed = DateTime.TryParse(signUpDto.BirthDate,out DateTime birthDate);
-            if (!isParsed) return new ModelError("Неправильний формат дати");
-
             var user = await _userRepository.GetByEmailAsync(signUpDto.Email);
             if (user != null) return new ModelError("Користувач з такою адресою вже зареєстрований");
+
+            if (signUpDto.BirthDate.AddYears(18) > DateTime.Now) return new ModelError("Користувачеві повинно виповнитись 18 років");
 
             var role = await _roleRepository.GetByTitleAsync(signUpDto.Role);
             if (role == null) return new NotFoundError("Роль не існує");
@@ -43,7 +42,7 @@ namespace BLL.Services
             {
                 FirstName = signUpDto.FirstName,
                 LastName = signUpDto.LastName,
-                BirthDate = birthDate.ToUniversalTime(),
+                BirthDate = signUpDto.BirthDate.ToUniversalTime(),
                 CreatedAt = DateTime.UtcNow,
                 Email = signUpDto.Email,
                 UserName = signUpDto.Email,
@@ -54,6 +53,28 @@ namespace BLL.Services
             await _userRepository.AddToRoleAsync(newUser, signUpDto.Role);
 
             return signUpDto;
+        }
+
+        public async Task<ServiceResult<UpdateUserDto>> UpdateUserAsync(UpdateUserDto updateUserData)
+        {
+            var user = await _userRepository.GetByIdAsync(updateUserData.Id);
+            if (user == null) return new NotFoundError("Користувача не знайдено");
+
+            user.FirstName = updateUserData.FirstName;
+            user.LastName = updateUserData.LastName;
+            user.BirthDate = updateUserData.BirthDate.ToUniversalTime();
+          
+            await _userRepository.UpdateUserAsync(user);
+            return updateUserData;
+        }
+
+        public async Task<ServiceResult<int>> DeleteUserAsync(int userId)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null) return new NotFoundError("Користувача не знайдено");
+            await _userRepository.DeleteUserAsync(user);
+
+            return 0;
         }
     }
 }
