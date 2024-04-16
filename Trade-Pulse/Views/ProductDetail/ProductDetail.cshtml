@@ -9,15 +9,18 @@
         <div class="col-md-6 offset-md-3">
             <div class="card mt-5">
                 <div class="card-body">
-                    
+
                     <h5 class="card-title">@Model.Title</h5>
                     <p class="card-text">@Model.Description</p>
                     <p class="card-text">Price: $@Model.Price</p>
                     <p class="card-text">Items Available: @Model.ItemsAvailable</p>
-                    <p class="card-text">Items Available: @Model.ItemsAvailable</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <form asp-action="AddToCart" asp-controller="ProductDetail">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
