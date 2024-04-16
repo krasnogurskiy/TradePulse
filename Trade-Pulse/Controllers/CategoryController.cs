@@ -24,7 +24,7 @@ namespace Trade_Pulse.Controllers
         public IActionResult Index()
         {
 	        List<Category> categories = _categoryService.GetAllAsync().Result;
-	        return View("Category", categories);
+	        return View(categories);
             //List<Category> categories = _context.Categories.ToList(); ;
             //return View(categories);
         }

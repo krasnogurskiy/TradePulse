@@ -12,7 +12,7 @@ namespace DAL.Repositories.Interfaces
 		public Task<List<Product>> GetAllByCategoryAsync(int category_id);
 
 		//Андрій
-        Task<List<Product>> GetAllAsync();
+        //Task<List<Product>> GetAllAsync();
         void Add(Product product);
         Task SaveChangesAsync();
 	}
