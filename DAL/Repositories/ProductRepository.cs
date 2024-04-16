@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using DAL.Data;
+﻿using DAL.Data;
 using DAL.Repositories.Interfaces;
 using DAL.Tools;
 using Microsoft.EntityFrameworkCore;
@@ -23,10 +21,16 @@ namespace DAL.Repositories
 		public Task<Product?> GetByIdAsync(int id) =>
 			_context.Products.FirstOrDefaultAsync(x => x.Id == id);
 
-		//Андрій
-        public void Add(Product product)
+        public async Task Add(Product product, int vendorId, int categoryId)
         {
+            var vendor = new User() { Id = vendorId };
+            var category = new Category() { Id = categoryId };
+            _context.Users.Attach(vendor);
+            _context.Categories.Attach(category);
+            product.Vendor = vendor;
+            product.Category = category;
             _context.Products.Add(product);
+            await _context.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()

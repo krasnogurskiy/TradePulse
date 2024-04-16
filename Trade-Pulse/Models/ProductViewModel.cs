@@ -5,7 +5,7 @@ namespace TradePulse.Models
     public class ProductViewModel
     {
         [Required(ErrorMessage = "Поле назви обов'язкове")]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [Required(ErrorMessage = "Поле опису обов'язкове")]
         public string Description { get; set; }
@@ -19,5 +19,11 @@ namespace TradePulse.Models
         [Required(ErrorMessage = "Поле кількості товару обов'язкове")]
         [Range(1, uint.MaxValue, ErrorMessage = "Кількість товару повинна бути більше нуля")]
         public uint ItemsAvailable { get; set; }
+
+        [Required(ErrorMessage = "Поле категорії обов'язкове")]
+        public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Поле постачальника обов'язкове")]
+        public int VendorId { get; set; }
     }
 }
