@@ -41,5 +41,11 @@ namespace DAL.Repositories
 		//Юра
 		public Task<List<Product>> GetAllByCategoryAsync(int category_id) =>
 			_context.Products.Where(x => x.Category != null && x.Category.Id == category_id).ToListAsync();
+
+        public void UpdateProduct(Product product)
+        {
+            _context.Entry(product).State = EntityState.Modified;
+        }
+
 	}
 }

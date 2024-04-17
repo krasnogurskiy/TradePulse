@@ -1,16 +1,13 @@
 using BLL.DTOs;
-using System.Collections.Generic;
-using BLL.Errors;
 using BLL.Features;
-using DAL.Tools;
 
 namespace BLL.Services.Interfaces
 {
     public interface ICartService
     {
-        void AddToCart(CartItemDto item);
-        void RemoveFromCart(int productId);
-        List<CartItemDto> GetCartItems();
-        void ClearCart();
+        public Task<ServiceResult<int>> AddToCart(CartItemDto item, int userId);
+        public Task RemoveFromCart(int userId, int productId);
+        public Task<List<CartListItemDto>> GetCartItems(int userId);
+        public Task ClearCart(int userId);
     }
 }

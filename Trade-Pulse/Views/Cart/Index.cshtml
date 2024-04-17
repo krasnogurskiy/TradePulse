@@ -1,4 +1,4 @@
-@model List<BLL.DTOs.CartItemDto>
+@model List<BLL.DTOs.CartListItemDto>
 
 @{
     ViewData["Title"] = "Cart";
@@ -27,7 +27,7 @@ else
                 <tr>
                     <td>@item.ProductTitle</td>
                     <td>@item.Price</td>
-                    <td>@item.Quantity</td>
+                    <td>@item.ItemsCount</td>
                     <td>
                         <form asp-action="RemoveFromCart" asp-controller="Cart">
                             <input type="hidden" name="id" value="@item.ProductId" />

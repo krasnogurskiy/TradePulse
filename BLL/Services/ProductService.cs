@@ -4,6 +4,7 @@ using BLL.Features;
 using BLL.Services.Interfaces;
 using DAL.Repositories.Interfaces;
 using DAL.Tools;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
@@ -15,13 +16,6 @@ namespace BLL.Services
         {
             _productRepository = productRepository;
         }
-
-
-        //public async Task AddProductAsync(ProductDto productDto)
-        //{
-        //    await _productRepository.AddAsync(productDto);
-        //    await _productRepository.SaveChangesAsync();
-        //}
 
         public async Task<ServiceResult<ProductDto>> AddProductAsync(ProductDto productDto)
         {
@@ -45,22 +39,18 @@ namespace BLL.Services
                 return ServiceResult<ProductDto>.Failure(new ModelError($"Failed to add product: {ex.Message}"));
             }
         }
-        public async Task<List<Product>> GetAllAsync()
-        {
-            var products = await _productRepository.GetAllAsync();
-            return products;
-        }
+        public Task<List<Product>> GetAllAsync() =>
+            _productRepository.GetAllAsync();
 
-        public async Task<Product?> GetByIdAsync(int id)
-        {
-            var product = _productRepository.GetByIdAsync(id).Result;
-            return product;
-        }
+        public Task<Product?> GetByIdAsync(int id) =>
+            _productRepository.GetByIdAsync(id);
 
-        public async Task<List<Product>> GetAllByCategoryAsync(int category_id)
+        public Task<List<Product>> GetAllByCategoryAsync(int categoryId) =>
+            _productRepository.GetAllByCategoryAsync(categoryId);
+
+        public void UpdateProduct(Product product)
         {
-            var product = await _productRepository.GetAllByCategoryAsync(category_id);
-            return product;
+            _productRepository.UpdateProduct(product);
         }
     }
 }

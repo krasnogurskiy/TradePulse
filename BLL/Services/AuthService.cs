@@ -47,7 +47,6 @@ namespace BLL.Services
                 Email = signUpDto.Email,
                 UserName = signUpDto.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                Cart = new Cart()
             };
             var result = await _userRepository.CreateUserAsync(newUser, signUpDto.Password);
             if (!result.Succeeded) return new ModelError(string.Join(", ", result.Errors).Replace("Fatal: ", string.Empty));

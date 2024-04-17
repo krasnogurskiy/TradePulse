@@ -1,9 +1,8 @@
-﻿using BLL.Services.Interfaces;
-using DAL.Data;
-using DAL.Tools;
+﻿using BLL.DTOs;
+using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Trade_Pulse.Helpers;
 
 namespace Trade_Pulse.Controllers
 {
@@ -16,19 +15,34 @@ namespace Trade_Pulse.Controllers
             _cartService = cartService;
         }
 
-        public IActionResult Index()
+        [Authorize]
+        public async Task<IActionResult> Index()
         {
-            var cartItems = _cartService.GetCartItems();
+            var userId = this.GetAuthorizedUserId();
+            var cartItems = await _cartService.GetCartItems(userId);
             return View(cartItems);
         }
 
-        public IActionResult AddToCart(int id)
+        [Authorize]
+        [HttpPost("add")]
+        public async Task<IActionResult> AddToCart(CartItemDto item)
         {
-            return RedirectToAction("Index");
+            var userId = this.GetAuthorizedUserId();
+            if (ModelState.IsValid)
+            {
+                var result = await _cartService.AddToCart(item, userId);
+                if (!result.IsSuccess) TempData["Error"] = result.Error!.Message;
+            }
+            return Redirect(HttpContext.Request.Headers["Referer"]!);
         }
 
-        public IActionResult RemoveFromCart(int id)
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCart(int id)
         {
+            var userId = this.GetAuthorizedUserId();
+            await _cartService.RemoveFromCart(userId, id);
             return RedirectToAction("Index");
         }
     }
