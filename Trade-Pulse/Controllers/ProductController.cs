@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using DAL.Repositories.Interfaces;
 using System.Security.Claims;
 using DAL.Tools;
+using Trade_Pulse.Helpers;
 
 namespace Trade_Pulse.Controllers
 {
@@ -39,7 +40,7 @@ namespace Trade_Pulse.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductDto productDto)
         {
-            var id = int.Parse(this.User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var id = this.GetAuthorizedUserId();
             productDto.VendorId = id;
             if (!ModelState.IsValid) return View(productDto);
 

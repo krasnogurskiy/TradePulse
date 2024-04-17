@@ -4,20 +4,35 @@
     ViewData["Title"] = "Product Detail";
 }
 
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Помилка: </b> - @TempData["Error"] </span>
+    </div>
+}
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card mt-5">
                 <div class="card-body">
-                    
+
                     <h5 class="card-title">@Model.Title</h5>
                     <p class="card-text">@Model.Description</p>
                     <p class="card-text">Price: $@Model.Price</p>
                     <p class="card-text">Items Available: @Model.ItemsAvailable</p>
-                    <p class="card-text">Items Available: @Model.ItemsAvailable</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @* <form asp-action="add" asp-controller="CartController"> *@
+                            <input type="hidden" name="ProductId" value="@Model.Id" />
+                            <input type="hidden" name="ItemsCount" value="1" />
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        @* </form> *@
+                        // rest of form
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
+

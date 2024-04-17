@@ -42,6 +42,7 @@ namespace Trade_Pulse.Helpers
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICartService, CartService>();
         }
 
         public static void InitCookies(this WebApplicationBuilder builder)

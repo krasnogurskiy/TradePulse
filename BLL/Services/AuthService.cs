@@ -46,7 +46,7 @@ namespace BLL.Services
                 CreatedAt = DateTime.UtcNow,
                 Email = signUpDto.Email,
                 UserName = signUpDto.Email,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
             };
             var result = await _userRepository.CreateUserAsync(newUser, signUpDto.Password);
             if (!result.Succeeded) return new ModelError(string.Join(", ", result.Errors).Replace("Fatal: ", string.Empty));
@@ -63,7 +63,7 @@ namespace BLL.Services
             user.FirstName = updateUserData.FirstName;
             user.LastName = updateUserData.LastName;
             user.BirthDate = updateUserData.BirthDate.ToUniversalTime();
-          
+
             await _userRepository.UpdateUserAsync(user);
             return updateUserData;
         }

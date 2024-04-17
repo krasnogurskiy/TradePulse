@@ -9,5 +9,6 @@ namespace DAL.Repositories.Interfaces
         public Task Add(Product product, int vendorId, int categoryId);
         public Task SaveChangesAsync();
         public Task<List<Product>> GetAllByCategoryAsync(int category_id);
+        public void UpdateProduct(Product product);
     }
 }
