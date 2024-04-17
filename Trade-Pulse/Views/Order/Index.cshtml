@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DAL.Tools.Order>
+
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<section>
+    <div>
+        <h1>Мої замовлення</h1>
+    </div>
+</section>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Дата створення</th>
+                <th>Сума замовлення</th>
+                <th>Спосіб оплати</th>
+                <th>Спосіб доставки</th>
+                <th>Статус замовлення</th>
+                <th>Кількість</th>
+                <th>Отримувач</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.CreatedAt</td>
+                    <td>@order.OrderPrice</td>
+                    <td>@order.PaymentType</td>
+                    <td>@order.DeliveryType</td>
+                    <td>@order.Status</td>
+                    <td>@order.ProductsCount</td>
+                    <td>*******</td>
+                    @* <td>@order.Receiver.FirstName</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
