@@ -26,6 +26,7 @@ namespace DAL.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<CartProduct>().HasKey(p => p.Id);
+            modelBuilder.Entity<OrderProduct>().HasKey(o => o.Id);
 
             modelBuilder.Entity<User>()
                 .Ignore(c => c.LockoutEnabled)
