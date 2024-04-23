@@ -15,7 +15,6 @@ namespace DAL.Data
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<OrderProduct> OrdersProducts { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -26,7 +25,6 @@ namespace DAL.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<CartProduct>().HasKey(p => p.Id);
-            modelBuilder.Entity<OrderProduct>().HasKey(o => o.Id);
 
             modelBuilder.Entity<User>()
                 .Ignore(c => c.LockoutEnabled)

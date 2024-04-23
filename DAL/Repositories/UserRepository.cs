@@ -42,5 +42,9 @@ namespace DAL.Repositories
 
         public Task DeleteUserAsync(User user) =>
             _userManager.DeleteAsync(user);
+
+        public Task<IList<string>> GetRolesAsync(int userId) =>
+            _userManager.GetRolesAsync(new User() { Id = userId });
+
     }
 }

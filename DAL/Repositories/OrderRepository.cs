@@ -17,5 +17,12 @@ namespace DAL.Repositories
         public Task<List<Order>> GetAllAsync() =>
             _context.Orders.ToListAsync();
 
+        public Task<List<Order>> GetVendorOrdersAsync(int userId) =>
+            _context.Orders.Include(o => o.Product).ThenInclude(p => p.Vendor)
+            .Where(v => v.Product.Vendor.Id == userId).ToListAsync();
+
+        public Task<List<Order>> GetDropshipperOrdersAsync(int userId) =>
+            _context.Orders.Include(o => o.Receiver).Where(o => o.Receiver.Id == userId).ToListAsync();
+
     }
 }
