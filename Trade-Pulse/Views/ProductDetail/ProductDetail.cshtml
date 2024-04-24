@@ -40,12 +40,15 @@
 							<span style="color: red;">Немає в наявності</span>
 						}
 					</p>
-					@using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+					@if (User.IsInRole("Роздрібний покупець"))
 					{
-						@Html.AntiForgeryToken()
-						<input type="hidden" name="ProductId" value="@Model.Id" />
-						<input type="hidden" name="ItemsCount" value="1" />
-						<button type="submit" class="btn btn-primary">Додати до корзини</button>
+						using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+						{
+							@Html.AntiForgeryToken()
+							<input type="hidden" name="ProductId" value="@Model.Id" />
+							<input type="hidden" name="ItemsCount" value="1" />
+							<button type="submit" class="btn btn-primary">Додати до корзини</button>
+						}
 					}
 				</div>
 			</div>
