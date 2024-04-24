@@ -84,6 +84,14 @@
                                         {
                                             <option>Доставлене</option>
                                         }
+                                        @if (order.Status == "Скасоване")
+                                        {
+                                            <option selected>Скасоване</option>
+                                        }
+                                        else
+                                        {
+                                            <option>Скасоване</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -41,6 +41,7 @@ namespace Trade_Pulse.Controllers
         {
             if (!ModelState.IsValid) return View("Create", createOrderDto);
             var userId = this.GetAuthorizedUserId();
+            createOrderDto.Address = $"{createOrderDto.Region}, {createOrderDto.City}, {createOrderDto.Street}, {createOrderDto.Street}, {createOrderDto.PostalCode}";
             var result = await _orderService.CreateOrderAsync(createOrderDto, userId);
             if (result.IsFailure)
             {
