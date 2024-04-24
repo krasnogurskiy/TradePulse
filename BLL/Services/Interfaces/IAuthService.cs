@@ -11,5 +11,6 @@ namespace BLL.Services.Interfaces
         public Task<ServiceResult<SignUpDto>> SignUpAsync(SignUpDto signUpDto);
         public Task<ServiceResult<UpdateUserDto>> UpdateUserAsync(UpdateUserDto updateUserData);
         public Task<ServiceResult<int>> DeleteUserAsync(int id);
+        public Task<IList<string>> GetUserRoles(int userId);
     }
 }

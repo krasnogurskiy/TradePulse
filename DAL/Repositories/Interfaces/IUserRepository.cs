@@ -15,5 +15,6 @@ namespace DAL.Repositories.Interfaces
         public Task UpdateSecurityStampAsync(User user);
         public Task UpdateUserAsync(User user);
         public Task DeleteUserAsync(User user);
+        public Task<IList<string>> GetRolesAsync(int userId);
     }
 }

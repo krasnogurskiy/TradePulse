@@ -15,7 +15,7 @@ namespace Trade_Pulse.Controllers
             _cartService = cartService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Роздрібний покупець")]
         public async Task<IActionResult> Index()
         {
             var userId = this.GetAuthorizedUserId();
@@ -23,7 +23,7 @@ namespace Trade_Pulse.Controllers
             return View(cartItems);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Роздрібний покупець")]
         [HttpPost("add")]
         public async Task<IActionResult> AddToCart(CartItemDto item)
         {
@@ -37,7 +37,7 @@ namespace Trade_Pulse.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Роздрібний покупець")]
         [HttpPost]
         public async Task<IActionResult> RemoveFromCart(int id)
         {

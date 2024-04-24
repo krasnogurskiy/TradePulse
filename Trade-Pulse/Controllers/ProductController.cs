@@ -3,7 +3,6 @@ using BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using DAL.Repositories.Interfaces;
-using System.Security.Claims;
 using DAL.Tools;
 using Trade_Pulse.Helpers;
 
@@ -20,9 +19,9 @@ namespace Trade_Pulse.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Product> products = _productService.GetAllAsync().Result;
+            List<Product> products = await _productService.GetAllAsync();
             return View(products);
         }
 
@@ -67,20 +66,6 @@ namespace Trade_Pulse.Controllers
             }
 
             return View(products);
-            //ViewBag.CategoryName = _categoryRepository.GetAllAsync().Result.FirstOrDefault(id)
-
-
-            //var category = _context.Categories.FirstOrDefault(c => c.Id == id);
-            //if (category != null)
-            //{
-            //	ViewBag.CategoryName = category.Title;
-            //	List<Product> productsInCategory = _context.Products.Where(p => p.Category != null && p.Category.Id == id).ToList();
-            //	if (productsInCategory.Any())
-            //	{
-            //		return View(productsInCategory);
-            //	}
-            //}
-            //return NotFound();
         }
     }
 }

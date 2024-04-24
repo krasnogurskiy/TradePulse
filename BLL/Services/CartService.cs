@@ -38,15 +38,22 @@ namespace BLL.Services
 
         public async Task RemoveFromCart(int userId, int productId)
         {
-            var deleteRows = await _ctx.CartsProducts.Include(c => c.User).Include(c => c.Product).Where(c => c.Product.Id == productId && c.User.Id == userId).ToListAsync();
+            var deleteRows = await DeleteFromCart(userId, productId);
+            if (deleteRows == null) return;
             var totalProducts = deleteRows.Sum(c => c.ItemsCount);
-            _ctx.CartsProducts.RemoveRange(deleteRows);
+
             var product = await _productService.GetByIdAsync(productId);
-          
             product!.ItemsAvailable += Convert.ToUInt32(totalProducts);
             _productService.UpdateProduct(product);
             await _ctx.SaveChangesAsync();
 
+        }
+        public async Task<List<CartProduct>?> DeleteFromCart(int userId, int productId, bool save = false)
+        {
+            var deleteRows = await _ctx.CartsProducts.Include(c => c.User).Include(c => c.Product).Where(c => c.Product.Id == productId && c.User.Id == userId).ToListAsync();
+            _ctx.CartsProducts.RemoveRange(deleteRows);
+            if(save) await _ctx.SaveChangesAsync();
+            return deleteRows;
         }
 
 

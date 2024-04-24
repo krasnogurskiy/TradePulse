@@ -1,9 +1,7 @@
 ﻿using BLL.Services.Interfaces;
-using DAL.Data;
 using DAL.Tools;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Trade_Pulse.Controllers
 {
@@ -17,9 +15,9 @@ namespace Trade_Pulse.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-	        List<Category> categories = _categoryService.GetAllAsync().Result;
+	        List<Category> categories = await _categoryService.GetAllAsync();
 	        return View(categories);
         }
     }
