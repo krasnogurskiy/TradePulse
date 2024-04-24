@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DAL.Tools.Order>
+﻿@model IEnumerable<BLL.DTOs.OrderDto>
 
 
 <style>
@@ -17,7 +17,12 @@
         background-color: #f2f2f2;
     }
 </style>
-
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Помилка: </b> - @TempData["Error"] </span>
+    </div>
+}
 <section>
     <div>
         <h1>Мої замовлення</h1>
@@ -34,8 +39,10 @@
                 <th>Спосіб оплати</th>
                 <th>Спосіб доставки</th>
                 <th>Статус замовлення</th>
-                <th>Кількість</th>
-                <th>Отримувач</th>
+                @* <th>Кількість</th> *@
+                <th>Адреса</th>
+                <th>Покупець</th>
+                <th>Постачальник</th>
             </tr>
         </thead>
         <tbody>
@@ -47,12 +54,61 @@
                     <td>@order.OrderPrice</td>
                     <td>@order.PaymentType</td>
                     <td>@order.DeliveryType</td>
-                    <td>@order.Status</td>
-                    <td>@order.ProductsCount</td>
-                    <td>*******</td>
-                    @* <td>@order.Receiver.FirstName</td> *@
+                    @if (User.IsInRole("Постачальник"))
+                    {
+                        <td>
+                            <form asp-action="UpdateOrderStatus" asp-controller="Order" method="post">
+                                <div class="form-group">
+                                    <select class="form-control form-control-md" name="status" onchange="this.form.submit()">
+                                        @if (order.Status == "Очікування")
+                                        {
+                                            <option selected>Очікування</option>
+                                        }
+                                        else
+                                        {
+                                            <option>Очікування</option>
+                                        }
+                                        @if (order.Status == "Відправлене")
+                                        {
+                                            <option selected>Відправлене</option>
+                                        }
+                                        else
+                                        {
+                                            <option>Відправлене</option>
+                                        }
+                                        @if (order.Status == "Доставлене")
+                                        {
+                                            <option selected>Доставлене</option>
+                                        }
+                                        else
+                                        {
+                                            <option>Доставлене</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="Id" value="@order.Id" />
+                                </div>
+                            </form>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>@order.Status</td>
+                    }
+                    <td>@order.Address</td>
+                    <td>@order.Receiver</td>
+                    <td>@order.Vendor</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section scripts {
+    <script>
+        function submit(formId) {
+
+        }
+    </script>
+}

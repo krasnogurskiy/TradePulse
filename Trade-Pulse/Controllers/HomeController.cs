@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using DAL.Repositories.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Trade_Pulse.Helpers;
 using Trade_Pulse.Models;
 
 namespace Trade_Pulse.Controllers
@@ -14,6 +13,7 @@ namespace Trade_Pulse.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated) return RedirectToAction("Index", "Category");
             return View();
         }
 

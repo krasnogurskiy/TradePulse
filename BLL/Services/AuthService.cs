@@ -76,5 +76,9 @@ namespace BLL.Services
 
             return 0;
         }
+
+        public Task<IList<string>> GetUserRoles(int userId)
+            => _userRepository.GetRolesAsync(userId);
+
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace DAL.Tools
+﻿namespace BLL.DTOs
 {
-    public class Order
+    public class OrderDto
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -9,9 +9,8 @@
         public string PaymentType { get; set; } = null!;
         public string DeliveryType { get; set; } = null!;
         public string Status { get; set; } = null!;
-        public uint ProductsCount { get; set; }
         public string Address { get; set; } = null!;
-        public User Receiver { get; set; } = null!;
-        public Product Product { get; set; } = new();
+        public string Receiver { get; set; } = null!;
+        public string Vendor { get; set; } = null!;
     }
 }
