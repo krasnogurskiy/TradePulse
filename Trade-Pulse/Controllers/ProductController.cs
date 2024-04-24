@@ -28,7 +28,6 @@ namespace Trade_Pulse.Controllers
         }
 
         [Authorize(Roles = "Постачальник")]
-        [HttpPost]
         public async Task<IActionResult> Create()
         {
             var categories = await _categoryRepository.GetAllAsync();
@@ -40,7 +39,7 @@ namespace Trade_Pulse.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductDto productDto)
         {
-            var id = this.GetAuthorizedUserId();
+            var id = int.Parse(this.User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
             productDto.VendorId = id;
             if (!ModelState.IsValid) return View(productDto);
 
@@ -53,6 +52,7 @@ namespace Trade_Pulse.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
         public async Task <IActionResult> Product(int id)
         {
             List<Product> products = await _productService.GetAllByCategoryAsync(id);
