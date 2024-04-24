@@ -13,7 +13,6 @@ namespace Trade_Pulse.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryRepository _categoryRepository;
 
-
         public ProductController(IProductService productService, ICategoryRepository categoryRepository)
         {
             _productService = productService;
@@ -52,12 +51,23 @@ namespace Trade_Pulse.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
         public async Task <IActionResult> Product(int id)
         {
             List<Product> products = await _productService.GetAllByCategoryAsync(id);
-            //ViewBag.CategoryName = ...
+            if (products == null || products.Count == 0)
+            {
+                return NotFound();
+            }
+
+            Category category = await _categoryRepository.GetByIdAsync(id);
+            if (category != null)
+            {
+                ViewBag.CategoryName = category.Title;
+            }
 
             return View(products);
+            //ViewBag.CategoryName = _categoryRepository.GetAllAsync().Result.FirstOrDefault(id)
 
 
             //var category = _context.Categories.FirstOrDefault(c => c.Id == id);
