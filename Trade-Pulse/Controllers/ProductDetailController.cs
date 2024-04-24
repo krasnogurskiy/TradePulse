@@ -9,18 +9,18 @@ namespace Trade_Pulse.Controllers
 {
     public class ProductDetailController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProductService _productService;
         private readonly ICartService _cartService;
 
-        public ProductDetailController(AppDbContext context, ICartService cartService)
+        public ProductDetailController(IProductService productService, ICartService cartService)
         {
-            _context = context;
+            _productService = productService;
             _cartService = cartService;
         }
 
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            var product = await _productService.GetByIdAsync(id);
             if (product != null)
             {
                 return View("ProductDetail", product);
