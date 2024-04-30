@@ -11,6 +11,13 @@ html {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
+.navbar_bg {
+    background-color: #060542;
+}
+
+a.navbar_txt {
+    color: #060542;
+}
 
 html {
   position: relative;
@@ -57,11 +64,16 @@ section.welc p {
     text-align: left;
     width: 80%;
 }
+section.welc .but_avt{
+    display:flex;
+    justify-content:space-around;
+    width: 30%;
+}
 
-section.welc .but_avt button {
-    padding: 10px 20px;
+section.welc .but_avt div {
+    padding: 10px 30px;
     border-radius: 7px;
-    margin: 0 10px;
+    margin: 0 10px 0 0;
     border: none;
     background-color: #5A65C8;
     font-size: 18px;
@@ -145,6 +157,7 @@ section.drop_work {
     .work_start h1 {
         font-size: 36px;
         color: #333;
+        margin-bottom: 40px;
     }
 
     .work_start ul {
