@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DAL.Tools.Product>
 
 @{
-	ViewData["Title"] = "Products";
+    ViewData["Title"] = "Products";
 }
 
 <style>
@@ -39,31 +39,39 @@
 </style>
 
 <section class="jumbotron text-center">
-	<div class="container">
-		<h1 class="jumbotron-heading">@ViewBag.CategoryName</h1>
-	</div>
+    <div class="container">
+        <h1 class="jumbotron-heading">@ViewBag.CategoryName</h1>
+    </div>
 </section>
 
 <div class="album py-5 d-flex justify-content-center">
-	<div class="container">
+    <div class="container">
         @if (User.IsInRole("Постачальник"))
         {
             <a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Створити оголошення про товар</a>
         }
-		<div class="row">
-			@foreach (var item in Model)
-			{
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<p class="card-text">@item.Title</p>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <img src="~/img/products/@item.ImageFileName" class="img-thumbnail card-img-top" />
+                    <div class="card mb-4 box-shadow w-300">
+                        <div class="card-body">
+                            <p class="card-text">@item.Title</p>
                             <p class="card-text text"><strong>Ціна: @item.Price грн</strong></p>
-                            <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id" class="stretched-link"></a>
-							@* <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a> *@
-						</div>
-					</div>
-				</div>
-			}
-		</div>
-	</div>
+                             <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+             @*    <div class="card">
+                    <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id" class="stretched-link"></a>
+                    <img class="card-img-top" src="~/img/products/@item.ImageFileName" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Ціна: @item.Price грн</p>
+                    </div>
+                </div> *@
+            }
+        </div>
+    </div>
 </div>

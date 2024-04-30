@@ -20,6 +20,14 @@ namespace BLL.Services
         {
             try
             {
+                if (productDto.Images == null) productDto.Images = new List<string>();
+
+                var images = new List<Image>();
+                foreach (var image in productDto.Images)
+                {
+                    var img = new Image() { Name = image };
+                    images.Add(img);
+                }
                 var product = new Product
                 {
                     Title = productDto.Title,
@@ -28,6 +36,8 @@ namespace BLL.Services
                     Price = productDto.Price,
                     ItemsAvailable = productDto.ItemsAvailable,
                     CreatedAt = DateTime.Now.ToUniversalTime(),
+                    ImageFileName = productDto.MainImage,
+                    Images = images
                 };
 
                 await _productRepository.Add(product, productDto.VendorId, productDto.CategoryId);

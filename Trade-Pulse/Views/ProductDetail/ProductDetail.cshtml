@@ -1,14 +1,14 @@
 @model DAL.Tools.Product
 
 @{
-	ViewData["Title"] = "Product Detail";
+    ViewData["Title"] = "Product Detail";
 }
 
 @if (TempData["Error"] != null)
 {
-	<div class="col-md-12 alert alert-danger">
-		<span><b>Помилка: </b> - @TempData["Error"] </span>
-	</div>
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Помилка: </b> - @TempData["Error"] </span>
+    </div>
 }
 
 <style>
@@ -16,43 +16,42 @@
         background-color: #C4D0E8;
     }
 
-	.card {
-		margin-bottom: 100px;
-		background-color: #0046D21A;
-	}
+    .card {
+        margin-bottom: 100px;
+        background-color: #0046D21A;
+    }
 </style>
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-6 offset-md-3">
-			<div class="card mt-5">
-				<div class="card-body">
-					<h5 class="card-title">@Model.Title</h5>
-					<p class="card-text">@Model.Description</p>
-					<p class="card-text">Ціна: @Model.Price грн</p>
-					<p class="card-text">
-						@if (Model.ItemsAvailable >= 1)
-						{
-							<span style="color: green;">Є в наявності</span>
-						}
-						else
-						{
-							<span style="color: red;">Немає в наявності</span>
-						}
-					</p>
-					@if (User.IsInRole("Роздрібний покупець"))
-					{
-						using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-						{
-							@Html.AntiForgeryToken()
-							<input type="hidden" name="ProductId" value="@Model.Id" />
-							<input type="hidden" name="ItemsCount" value="1" />
-							<button type="submit" class="btn btn-primary">Додати до корзини</button>
-						}
-					}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">Ціна: @Model.Price грн</p>
+                    <p class="card-text">
+                        @if (Model.ItemsAvailable >= 1)
+                        {
+                            <span style="color: green;">Є в наявності</span>
+                        }
+                        else
+                        {
+                            <span style="color: red;">Немає в наявності</span>
+                        }
+                    </p>
+                    @if (User.IsInRole("Роздрібний покупець"))
+                    {
+                        using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ProductId" value="@Model.Id" />
+                            <input type="hidden" name="ItemsCount" value="1" />
+                            <button type="submit" class="btn btn-primary">Додати до корзини</button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
