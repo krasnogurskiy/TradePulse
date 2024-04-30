@@ -12,9 +12,9 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow navbar_bg">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trade Pulse</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img alt="logo" src="~/img/logoTr.png" width="140"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,28 +24,28 @@
                     {
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                                <a class="nav-link" style="color: #D0CDCD;" asp-area="" asp-controller="Home" asp-action="Index">
                                     Домашня
                                     Сторінка
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Category"
+                                <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Category"
                                    asp-action="Index">Категорії</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth"
+                                <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Auth"
                                    asp-action="Update">Профіль</a>
                             </li>
                             @if (!User.IsInRole("Постачальник"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cart"
+                                    <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Cart"
                                        asp-action="Index">Корзина</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Order"
+                                <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Order"
                                    asp-action="Index">Мої замовлення</a>
                             </li>
                         </ul>
