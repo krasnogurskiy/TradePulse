@@ -1,74 +1,65 @@
 ﻿@model IEnumerable<DAL.Tools.Product>
 
-@{
-    ViewData["Title"] = "Products";
-}
+    @{
+	ViewData["Title"] = "Products";
+    }
 
     <style>
         body {
             background-color: #C4D0E8;
         }
 
-    .card {
-        width: 20vw;
-        margin-bottom: 20px;
-        background-color: #0046D21A;
-    }
+        .card {
+            width: 400px;
+            margin-bottom: 20px;
+            background-color: #0046D21A;
+        }
 
-    .card-img-top {
-        width: 100%;
-        margin: 0 auto;
-        display: block;
-    }
+        .card-img-top {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            display: block;
+        }
 
         .card-title {
             font-size: 28px;
             color: #060542;
         }
 
-    .card-body {
-        /*padding: 1.25rem;*/
-    }
-
-    .card:hover {
-        cursor: pointer;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-primaryL {
-        background-color: rgb(224, 243, 247);
-        color: black;
-        margin-right: 10px;
-    }
-
-        .btn-primaryL:hover {
-            background-color: #5A65C8;
+        .card-body {
+            padding: 1.25rem;
         }
 
-</style>
+        .card:hover {
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">@ViewBag.CategoryName</h1>
-    </div>
-</section>
+    <section class="jumbotron" style="text-align: left; background-color: #C4D0E8; padding: 20px 30px; ">
+        <div class="container">
+            <h1 style="margin: 20px 0 0;">@ViewBag.CategoryName</h1>
+        </div>
+    </section>
 
-<div class="album py-5 d-flex justify-content-center">
-	<div class="container">
-		<div class="row">
-			@foreach (var item in Model)
+    <div class="album py-5 d-flex justify-content-center">
+        <div class="container">
+
+            <div class="row">
+                @foreach (var item in Model)
 			{
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<p class="card-text">@item.Title</p>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <p class="card-text">@item.Title</p>
                             <p class="card-text text"><strong>Ціна: @item.Price грн</strong></p>
                             <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id" class="stretched-link"></a>
-							@* <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a> *@
-						</div>
-					</div>
-				</div>
+                            @* <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a> *@
+                        </div>
+                    </div>
+                </div>
 			}
-		</div>
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
