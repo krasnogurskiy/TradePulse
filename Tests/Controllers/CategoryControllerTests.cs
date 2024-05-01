@@ -23,19 +23,16 @@ namespace Tests.Controllers
         [Fact]
         public async Task CategoryController_Index_ReturnsSuccess()
         {
-            //var categories = new List<Category>();
-            //var categories = A.Fake<List<Category>>();
             var categories = A.Fake<List<Category>>();
             A.CallTo(() => _categoryService.GetAllAsync()).Returns(categories);
 
-            var result = _categoryController.Index();
+            var result = await _categoryController.Index();
 
             result.Should().BeOfType<ViewResult>();
         }
 
-
         [Fact]
-        public void Index_ReturnsViewWithCategories()
+        public async Task Index_ReturnsViewWithCategories()
         {
             // Arrange
             var mockCategoryService = new Mock<ICategoryService>();
@@ -49,7 +46,7 @@ namespace Tests.Controllers
             var controller = new CategoryController(mockCategoryService.Object);
 
             // Act
-            var result = controller.Index();
+            var result = await controller.Index();
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
@@ -58,7 +55,7 @@ namespace Tests.Controllers
         }
 
         [Fact]
-        public void Index_ReturnsViewWithNoCategories()
+        public async Task Index_ReturnsViewWithNoCategories()
         {
             // Arrange
             var mockCategoryService = new Mock<ICategoryService>();
@@ -66,7 +63,7 @@ namespace Tests.Controllers
             var controller = new CategoryController(mockCategoryService.Object);
 
             // Act
-            var result = controller.Index();
+            var result = await controller.Index();
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);

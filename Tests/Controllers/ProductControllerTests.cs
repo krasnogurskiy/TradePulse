@@ -34,7 +34,8 @@ namespace Tests.Controllers
             var products = A.Fake<List<Product>>();
             A.CallTo(() => _productService.GetAllAsync()).Returns(products);
 
-            var result = _productController.Index();
+            // Очікуємо завершення асинхронного методу перед порівнянням типів результату
+            var result = await _productController.Index();
 
             result.Should().BeOfType<ViewResult>();
         }
@@ -51,7 +52,7 @@ namespace Tests.Controllers
 
             // Assert
             result.Should().BeOfType<ViewResult>();
-            //result.Model.Should().BeOfType<ProductDto>().And.Subject.As<ProductDto>().Categories.Should().BeEquivalentTo(categories);
+            result.Model.Should().BeOfType<ProductDto>().And.Subject.As<ProductDto>().Categories.Should().BeEquivalentTo(categories);
         }
 
         [Fact]
@@ -115,7 +116,7 @@ namespace Tests.Controllers
         }
 
         [Fact]
-        public void Index_ReturnsViewWithProducts()
+        public async Task Index_ReturnsViewWithProducts()
         {
             // Arrange
             var mockProductService = new Mock<IProductService>();
@@ -129,7 +130,7 @@ namespace Tests.Controllers
             var controller = new ProductController(mockProductService.Object, null);
 
             // Act
-            var result = controller.Index();
+            var result = await controller.Index();
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);

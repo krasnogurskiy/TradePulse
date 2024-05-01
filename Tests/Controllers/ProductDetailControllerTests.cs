@@ -25,7 +25,8 @@ namespace Tests.Controllers
             var expectedProduct = new Product { Id = productId, Title = "Product 1" };
             var productServiceMock = new Mock<IProductService>();
             productServiceMock.Setup(service => service.GetByIdAsync(productId)).ReturnsAsync(expectedProduct);
-            var controller = new ProductDetailController(productServiceMock.Object);
+            var cartServiceMock = new Mock<ICartService>(); // Додано мок для ICartService
+            var controller = new ProductDetailController(productServiceMock.Object, cartServiceMock.Object); // Передаємо обидва моки в конструктор
 
             // Act
             var result = await controller.Index(productId) as ViewResult;
@@ -45,7 +46,8 @@ namespace Tests.Controllers
             int invalidProductId = 999;
             var productServiceMock = new Mock<IProductService>();
             productServiceMock.Setup(service => service.GetByIdAsync(invalidProductId)).ReturnsAsync((Product)null);
-            var controller = new ProductDetailController(productServiceMock.Object);
+            var cartServiceMock = new Mock<ICartService>(); // Додано мок для ICartService
+            var controller = new ProductDetailController(productServiceMock.Object, cartServiceMock.Object); // Передаємо обидва моки в конструктор
 
             // Act
             var result = await controller.Index(invalidProductId) as NotFoundResult;

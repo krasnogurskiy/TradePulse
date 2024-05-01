@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
@@ -14,31 +15,57 @@ namespace Tests.Controllers
     public class HomeControllerTests
     {
         [Fact]
-        public void Index_ReturnsViewResult()
+        public void Index_WhenUserAuthenticated_RedirectsToCategoryIndex()
         {
             // Arrange
-            var loggerMock = new Mock<ILogger<HomeController>>();
-            var controller = new HomeController(loggerMock.Object);
+            var controller = new HomeController();
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = Mock.Of<HttpContext>(x => x.User.Identity.IsAuthenticated == true)
+            };
 
             // Act
-            var result = controller.Index();
+            var result = controller.Index() as RedirectToActionResult;
 
             // Assert
-            Assert.IsType<ViewResult>(result);
+            Assert.NotNull(result);
+            Assert.Equal("Category", result.ControllerName);
+            Assert.Equal("Index", result.ActionName);
         }
 
         [Fact]
-        public void Error_ReturnsViewResult()
+        public void Index_WhenUserNotAuthenticated_ReturnsViewResult()
         {
             // Arrange
-            var loggerMock = new Mock<ILogger<HomeController>>();
-            var controller = new HomeController(loggerMock.Object);
+            var controller = new HomeController();
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = Mock.Of<HttpContext>(x => x.User.Identity.IsAuthenticated == false)
+            };
 
             // Act
-            //var result = controller.Error();
+            var result = controller.Index() as ViewResult;
 
             // Assert
-            //Assert.IsType<ViewResult>(result);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Error_ReturnsViewResultWithErrorViewModel()
+        {
+            // Arrange
+            var controller = new HomeController();
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+
+            // Act
+            var result = controller.Error() as ViewResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<ErrorViewModel>(result.Model);
         }
     }
 }
