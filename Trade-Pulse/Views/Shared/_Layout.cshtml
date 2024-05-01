@@ -22,38 +22,46 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: #D0CDCD;" asp-area="" asp-controller="Home" asp-action="Index">
-                                    Домашня
-                                    Сторінка
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Category"
-                                   asp-action="Index">Категорії</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Auth"
-                                   asp-action="Update">Профіль</a>
-                            </li>
-                            @if (!User.IsInRole("Постачальник"))
+                    <ul class="navbar-nav flex-grow-1">
+                        @*<li class="nav-item">
+                            <a class="nav-link" style="color: #D0CDCD;" asp-area="" asp-controller="Home" asp-action="Index">
+                                Домашня
+                                Сторінка
+                            </a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Category"
+                               asp-action="Index">Категорії</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Auth"
+                               asp-action="Update">Профіль</a>
+                        </li>
+
+                        }
+                        @if (!User.IsInRole("Постачальник"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Cart"
-                                       asp-action="Index">Корзина</a>
-                                </li>
+                        <li class="nav-item">
+                            <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Cart"
+                               asp-action="Index">Корзина</a>
+                        </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Order"
-                                   asp-action="Index">Мої замовлення</a>
-                            </li>
-                        </ul>
-                        <div class="justify-content-end">
-                            <form method="post" asp-controller="Auth" asp-action="Logout">
-                                <input type="submit" value="Вийти" class="btn btn-danger" />
-                            </form>
-                        </div>
+                        <li class="nav-item">
+                            <a class="nav-link " style="color: #D0CDCD;" asp-area="" asp-controller="Order"
+                               asp-action="Index">Мої замовлення</a>
+                        </li>
+   
+                    </ul>
+                    <div class="d-flex justify-content-between">
+                        @if (User.IsInRole("Постачальник"))
+    {
+                        <a href="@Url.Action("Create", "Product")" class="btn btn-primary" style="margin: 0 20px 0 0">Створити оголошення</a>
+    }
+                        <form method="post" asp-controller="Auth" asp-action="Logout">
+                            <input type="submit" value="Вийти" class="btn btn-danger" />
+                        </form>
+                    </div>
+
                     }
                 </div>
             </div>
