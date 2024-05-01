@@ -1,4 +1,4 @@
-@model DAL.Tools.Product
+п»ї@model DAL.Tools.Product
 
 @{
     ViewData["Title"] = "Product Detail";
@@ -7,7 +7,7 @@
 @if (TempData["Error"] != null)
 {
     <div class="col-md-12 alert alert-danger">
-        <span><b>Помилка: </b> - @TempData["Error"] </span>
+        <span><b>ГЏГ®Г¬ГЁГ«ГЄГ : </b> - @TempData["Error"] </span>
     </div>
 }
 
@@ -29,25 +29,25 @@
                 <div class="card-body">
                     <h5 class="card-title">@Model.Title</h5>
                     <p class="card-text">@Model.Description</p>
-                    <p class="card-text">Ціна: @Model.Price грн</p>
+                    <p class="card-text">Р¦С–РЅР°: @Model.Price ГЈГ°Г­</p>
                     <p class="card-text">
                         @if (Model.ItemsAvailable >= 1)
                         {
-                            <span style="color: green;">Є в наявності</span>
+                            <span style="color: green;">ВЄ Гў Г­Г ГїГўГ­Г®Г±ГІВі</span>
                         }
                         else
                         {
-                            <span style="color: red;">Немає в наявності</span>
+                            <span style="color: red;">ГЌГҐГ¬Г Вє Гў Г­Г ГїГўГ­Г®Г±ГІВі</span>
                         }
                     </p>
-                    @if (User.IsInRole("Роздрібний покупець"))
+                    @if (User.IsInRole("Р РѕР·РґСЂС–Р±РЅРёР№ РїРѕРєСѓРїРµС†СЊ"))
                     {
                         using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="ProductId" value="@Model.Id" />
                             <input type="hidden" name="ItemsCount" value="1" />
-                            <button type="submit" class="btn btn-primary">Додати до корзини</button>
+                            <button type="submit" class="btn btn-primary">Р”РѕРґР°С‚Рё Сѓ РєРѕС€РёРє</button>
                         }
                     }
                 </div>

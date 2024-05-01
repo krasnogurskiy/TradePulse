@@ -10,14 +10,13 @@
     }
 
     .card {
-        width: 400px;
+        width: 20vw;
         margin-bottom: 20px;
         background-color: #0046D21A;
     }
 
     .card-img-top {
-        width: 300px;
-        height: 300px;
+        width: 100%;
         margin: 0 auto;
         display: block;
     }
@@ -28,7 +27,7 @@
     }
 
     .card-body {
-        padding: 1.25rem;
+        /*padding: 1.25rem;*/
     }
 
     .card:hover {
@@ -46,20 +45,21 @@
 
 <div class="album py-5 d-flex justify-content-center">
     <div class="container">
-        @if (User.IsInRole("Постачальник"))
-        {
-            <a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Створити оголошення про товар</a>
-        }
         <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-md-4">
-                    <img src="~/img/products/@item.ImageFileName" class="img-thumbnail card-img-top" />
+                    @*<img src="~/img/products/@item.ImageFileName" class="img-thumbnail card-img-top" />*@
                     <div class="card mb-4 box-shadow w-300">
-                        <div class="card-body">
-                            <p class="card-text">@item.Title</p>
+                        <div class="card-body" style="padding:1px;">
+                            <img src="~/img/products/@item.ImageFileName" class="img-thumbnail card-img-top" />
+                            <center>
+                                <p class="card-text" style="font-size: 18px; margin: 10px 10px 0 10px"><strong class="fw-bold">@item.Title</strong></p>
+                            </center> <hr>
                             <p class="card-text text"><strong>Ціна: @item.Price грн</strong></p>
-                             <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a>
+                            <p class="card-text">@item.ItemsAvailable</p>
+                            <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a>
+                                                   
                         </div>
                     </div>
                 </div>
