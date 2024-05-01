@@ -1,58 +1,173 @@
-@model DAL.Tools.Product
+﻿@model DAL.Tools.Product
 
 @{
-	ViewData["Title"] = "Product Detail";
+    ViewData["Title"] = "Product Detail";
 }
 
 @if (TempData["Error"] != null)
 {
-	<div class="col-md-12 alert alert-danger">
-		<span><b>�������: </b> - @TempData["Error"] </span>
-	</div>
+<div class="col-md-12 alert alert-danger">
+    <span><b>Ïîìèëêà: </b> - @TempData["Error"] </span>
+</div>
 }
+
+@*<style>
+        body {
+            background-color: #C4D0E8;
+        }
+
+        .card {
+            margin-bottom: 100px;
+            background-color: #0046D21A;
+        }
+    </style>*@
 
 <style>
     body {
         background-color: #C4D0E8;
     }
 
-	.card {
-		margin-bottom: 100px;
-		background-color: #0046D21A;
-	}
+    .product-container {
+        margin-bottom: 100px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .product-image {
+        flex: 1;
+        margin-right: 20px;
+    }
+
+    .product-details {
+        flex: 1;
+    }
+
+    .availability {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .btn-primaryD {
+        background-color: #5A65C8;
+        color: black;
+        margin-right: 10px;
+    }
+
+        .btn-primaryD:hover {
+            color: white;
+        }
 </style>
 
+
+
+
 <div class="container">
-	<div class="row">
-		<div class="col-md-6 offset-md-3">
-			<div class="card mt-5">
-				<div class="card-body">
-					<h5 class="card-title">@Model.Title</h5>
-					<p class="card-text">@Model.Description</p>
-					<p class="card-text">ֳ��: @Model.Price ���</p>
-					<p class="card-text">
-						@if (Model.ItemsAvailable >= 1)
-						{
-							<span style="color: green;">� � ��������</span>
-						}
-						else
-						{
-							<span style="color: red;">���� � ��������</span>
-						}
-					</p>
-					@if (User.IsInRole("��������� ��������"))
-					{
-						using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-						{
-							@Html.AntiForgeryToken()
-							<input type="hidden" name="ProductId" value="@Model.Id" />
-							<input type="hidden" name="ItemsCount" value="1" />
-							<button type="submit" class="btn btn-primary">������ �� �������</button>
-						}
-					}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (TempData["Error"] != null)
+            {
+            <div class="alert alert-danger">
+                <strong>Помилка: </strong> - @TempData["Error"]
+            </div>
+            }
+        </div>
+    </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 product-container">
+            <div class="product-image">
+                <img src="~/img/products/@Model.ImageFileName" class="img-thumbnail" />
+            </div>
+            <div class="product-details">
+                <h2>@Model.Title <hr></h2>
+                <p><strong>Опис:</strong> <br> @Model.Description <hr></p>
+                <p> <strong>Ціна:</strong> @Model.Price грн</p>
+                <p class="availability">
+                    @if (Model.ItemsAvailable >= 1)
+                    {
+                    <span style="color: green;">В наявності @Model.ItemsAvailable шт</span>
+                    }
+                    else
+                    {
+                    <span style="color: red;">Недоступно в наявності</span>
+                    }
+                </p>
+                @if (User.IsInRole("Роздрібний покупець"))
+                {
+                    using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                    {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ProductId" value="@Model.Id" />
+                <input type="hidden" name="ItemsCount" value="1" />
+                <button type="submit" class="btn btn-primaryD">Додати у кошик</button>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <img src="~/img/products/@Model.ImageFileName" class="img-thumbnail card-img-top" />
+                        <h5 class="card-title">@Model.Title</h5>
+                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text">Ціна: @Model.Price ãðí</p>
+                        <p class="card-text">
+                            @if (Model.ItemsAvailable >= 1)
+                            {
+                            <span style="color: green;">ª â íàÿâíîñò³</span>
+                            }
+                            else
+                            {
+                            <span style="color: red;">Íåìàº â íàÿâíîñò³</span>
+                            }
+                        </p>
+                        @if (User.IsInRole("Роздрібний покупець"))
+                        {
+                            using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                            {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="ProductId" value="@Model.Id" />
+                        <input type="hidden" name="ItemsCount" value="1" />
+                        <button type="submit" class="btn btn-primary">Додати у кошик</button>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

@@ -10,6 +10,6 @@ namespace DAL.Tools
         public DateTime CreatedAt { get; set; }
         public List<Order>? Orders { get; set; }
         public List<Product>? Products { get; set; }
-        public Subscription? Subscription { get; set; } = null!;
+        //public Subscription? Subscription { get; set; } = null!;
     }
 }

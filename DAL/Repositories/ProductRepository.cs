@@ -19,7 +19,7 @@ namespace DAL.Repositories
 			_context.Products.ToListAsync();
 
 		public Task<Product?> GetByIdAsync(int id) =>
-			_context.Products.FirstOrDefaultAsync(x => x.Id == id);
+			_context.Products.Include(p => p.Images).FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task Add(Product product, int vendorId, int categoryId)
         {

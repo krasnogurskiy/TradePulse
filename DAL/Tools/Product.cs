@@ -11,5 +11,7 @@
         public uint ItemsAvailable { get; set; }
         public DateTime CreatedAt { get; set; }
         public User Vendor { get; set; } = null!;
+        public string ImageFileName { get; set; } = "default.jpg";
+        public List<Image>? Images { get; set; }
     }
 }

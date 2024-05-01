@@ -27,5 +27,9 @@ namespace BLL.DTOs
 
         public Category[] Categories { get; set; } = null!;
 
-	}
+        public string MainImage { get; set; } = "default.jpg";
+
+        public IList<string>? Images { get; set; }
+
+    }
 }
