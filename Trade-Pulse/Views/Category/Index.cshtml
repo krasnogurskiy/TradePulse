@@ -1,53 +1,54 @@
 ﻿@model IEnumerable<DAL.Tools.Category>
 
-@{
+    @{
     ViewData["Title"] = "Categories";
-}
-
-<style>
-    body {
-        background-color: #C4D0E8;
     }
 
-    .card {
-        width: 400px;
-        margin-bottom: 20px;
-        background-color: #0046D21A;
-    }
+    <style>
 
-    .card-img-top {
-        width: 300px;
-        height: 300px;
-        margin: 0 auto;
-        display: block;
-    }
+        body {
+            background-color: #C4D0E8;
+        }
 
-    .card-title {
-        font-size: 28px;
-        color: #060542;
-    }
+        .card {
+            width: 20vw;
+            margin-bottom: 20px;
+            background-color: #0046D21A;
+        }
 
-    .card-body {
-        padding: 1.25rem;
-    }
+        .card-img-top {
+            width: 70%;
+            margin: 0 auto;
+            display: block;
+        }
 
-    .card:hover {
-        cursor: pointer;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+        .card-title {
+            font-size: 28px;
+            color: #060542;
+        }
 
-</style>
+        .card-body {
+            padding: 1.25rem;
+        }
 
-<section class="jumbotron" style="text-align: center; background-color: #C4D0E8;">
-    <div class="container">
-        <h1 style="margin-bottom: 0;">Категорії</h1>
-    </div>
-</section>
+        .card:hover {
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 
-<div class="album py-5 d-flex justify-content-center">
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
+    <section class="jumbotron" style="text-align: left; background-color: #C4D0E8; padding: 20px 30px; ">
+        <div class="container">
+            <h1 style="margin: 20px 0 0;">Категорії</h1>
+        </div>
+    </section>
+
+
+
+    <div class="album py-5 d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
             {
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
@@ -59,6 +60,6 @@
                     </div>
                 </div>
             }
+            </div>
         </div>
     </div>
-</div>

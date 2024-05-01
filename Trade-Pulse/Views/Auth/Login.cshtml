@@ -1,39 +1,109 @@
 ﻿@{
     @using BLL.DTOs
     @model LoginDto
-
 }
-<div class="row">
-    <div class="col-md-6 offset-3">
-        <p>
-        <h4>Увійти в профіль</h4>
-        </p>
-        @if (TempData["Error"] != null)
-        {
-            <div class="col-md-12 alert alert-danger">
-                <span><b>Помилка!</b>: @TempData["Error"]</span>
-            </div>
+
+<style>
+    body {
+        margin: 0;
+        background-color: #A1B4D9;
+    }
+
+    .containerLog {
+        background-color: #C4D0E8;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        width: 40vw;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .title {
+        text-align: center;
+        color: #184191;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        color: #184191;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 30vw;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: rgb(224, 243, 247);
+        color: black;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: rgb(224, 243, 247);
+        color: black;
+        margin-right: 10px;
+    }
+        .btn-primary:hover {
+            background-color: #5A65C8;
         }
-        <div class="row">
-            <div class="col-md-8 offset-2">
-                <form asp-action="Login">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control">
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" type="password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-5">
-                        <input class="btn btn-outline-success float right" type="submit" value="Увійти" />
-                        <a class="btn btn-outline-secondary" asp-controller="Auth" asp-action="Index">Скасувати</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+
+    .btn-secondary {
+        background-color: transparent;
+        border: 1px solid #060542;
+        color: #060542;
+    }
+
+        .btn-secondary:hover {
+            border: 1px solid #5A65C8;
+            background-color: transparent;
+            color: #5A65C8;
+        }
+</style>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 85vh;">
+<div class="containerLog">
+    <div class="title">
+        <h4>Увійти в профіль</h4>
     </div>
+
+    @if (TempData["Error"] != null)
+    {
+    <div class="alert alert-danger">
+        <span><b>Помилка!</b>: @TempData["Error"]</span>
+    </div>
+    }
+
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" type="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-5">
+            <input class="btn btn-primary" type="submit" value="Увійти" />
+            <a class="btn btn-secondary" asp-controller="Auth" asp-action="Index">Скасувати</a>
+        </div>
+    </form>
+</div>
 </div>
