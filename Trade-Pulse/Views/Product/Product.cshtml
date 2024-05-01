@@ -35,6 +35,16 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
+    .btn-primaryL {
+        background-color: rgb(224, 243, 247);
+        color: black;
+        margin-right: 10px;
+    }
+
+        .btn-primaryL:hover {
+            background-color: #5A65C8;
+        }
+
 </style>
 
 <section class="jumbotron text-center">
@@ -56,10 +66,16 @@
                             <center>
                                 <p class="card-text" style="font-size: 18px; margin: 10px 10px 0 10px"><strong class="fw-bold">@item.Title</strong></p>
                             </center> <hr>
-                            <p class="card-text text"><strong>Ціна: @item.Price грн</strong></p>
-                            <p class="card-text">@item.ItemsAvailable</p>
-                            <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a>
-                                                   
+                                      <div style="margin-left:5px">
+                                          <p class="card-text text"><strong>Ціна:</strong> @item.Price грн</p>
+                                          <p class="card-text"><strong>Наявність:</strong> @item.ItemsAvailable</p>
+
+                                      </div>
+      
+                            @*<a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-primary " style="margin: 0 5px 5px 0;" role="button">Переглянути</a>*@
+                        <div class="d-flex justify-content-end align-items-end" style="height: 100%;">
+                            <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-primaryL " style="margin: 0 5px 5px 0;" role="button">Переглянути</a>
+                        </div>                       
                         </div>
                     </div>
                 </div>
