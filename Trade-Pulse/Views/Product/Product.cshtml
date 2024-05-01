@@ -55,10 +55,6 @@
 
 <div class="album py-5 d-flex justify-content-center">
 	<div class="container">
-        @if (User.IsInRole("Постачальник"))
-        {
-            <a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Створити оголошення про товар</a>
-        }
 		<div class="row">
 			@foreach (var item in Model)
 			{
