@@ -10,10 +10,13 @@
             <p>Шукаєте можливість почати або розширити свій товарний бізнес? Приєднуйтесь до нас сьогодні та почніть збільшувати свій прибуток! </p>
             <div class="but_avt">
                 <div>
-                <a href="/Auth" role="button" style="color:white; text-decoration:none;" >Вхід</a> 
+                    <a href="/Auth" role="button" style="color:white; text-decoration:none;">Вхід</a>
                 </div>
                 <div>
-                    <a href="/Auth/SignUp" role="button" style="color:white; text-decoration:none;" >Зареєструватись</a>
+                    <a href="/Auth/SignUp" role="button" style="color:white; text-decoration:none;">Зареєструватись</a>
+                </div>
+                <div>
+                    <a id="scroll_btn" role="button" style="color:white; text-decoration:none;">Дізнатися більше</a>
                 </div>
             </div>
         </div>
@@ -64,3 +67,11 @@
         </ul>
     </section>
 </main>
+
+@section Scripts {
+    <script>
+        $("#scroll_btn").click(function () {
+            document.querySelector(".drop_work").scrollIntoView();
+        })
+    </script>
+}
