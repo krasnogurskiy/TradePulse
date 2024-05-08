@@ -1,21 +1,19 @@
 ﻿@model DAL.Tools.Product
-
 @{
     ViewData["Title"] = "Product Detail";
 }
 
 @if (TempData["Error"] != null)
 {
-<div class="col-md-12 alert alert-danger">
-    <span><b>Ïîìèëêà: </b> - @TempData["Error"] </span>
-</div>
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Ïîìèëêà: </b> - @TempData["Error"] </span>
+    </div>
 }
 
 @*<style>
         body {
             background-color: #C4D0E8;
         }
-
         .card {
             margin-bottom: 100px;
             background-color: #0046D21A;
@@ -46,18 +44,17 @@
         margin-top: 10px;
         font-weight: bold;
     }
+
     .btn-primaryD {
         background-color: #5A65C8;
         color: black;
         margin-right: 10px;
     }
 
-        .btn-primaryD:hover {
-            color: white;
-        }
+    .btn-primaryD:hover {
+        color: white;
+    }
 </style>
-
-
 
 
 <div class="container">
@@ -65,9 +62,9 @@
         <div class="col-md-12">
             @if (TempData["Error"] != null)
             {
-            <div class="alert alert-danger">
-                <strong>Помилка: </strong> - @TempData["Error"]
-            </div>
+                <div class="alert alert-danger">
+                    <strong>Помилка: </strong> - @TempData["Error"]
+                </div>
             }
         </div>
     </div>
@@ -86,21 +83,21 @@
                 <p class="availability">
                     @if (Model.ItemsAvailable >= 1)
                     {
-                    <span style="color: green;">В наявності @Model.ItemsAvailable шт</span>
+                        <span style="color: green;">В наявності @Model.ItemsAvailable шт</span>
                     }
                     else
                     {
-                    <span style="color: red;">Недоступно в наявності</span>
+                        <span style="color: red;">Немає в наявності</span>
                     }
                 </p>
                 @if (User.IsInRole("Роздрібний покупець"))
                 {
                     using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
                     {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="ProductId" value="@Model.Id" />
-                <input type="hidden" name="ItemsCount" value="1" />
-                <button type="submit" class="btn btn-primaryD">Додати у кошик</button>
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="ProductId" value="@Model.Id" />
+                        <input type="hidden" name="ItemsCount" value="1" />
+                        <button type="submit" class="btn btn-primaryD">Додати в корзину</button>
                     }
                 }
             </div>

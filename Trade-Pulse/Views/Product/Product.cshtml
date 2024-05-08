@@ -1,65 +1,91 @@
 ﻿@model IEnumerable<DAL.Tools.Product>
 
-    @{
+@{
 	ViewData["Title"] = "Products";
+}
+
+<style>
+    body {
+        background-color: #C4D0E8;
     }
 
-    <style>
-        body {
-            background-color: #C4D0E8;
-        }
+    .card {
+        width: 20vw;
+        margin-bottom: 20px;
+        background-color: #0046D21A;
+    }
 
-        .card {
-            width: 400px;
-            margin-bottom: 20px;
-            background-color: #0046D21A;
-        }
+    .card-img-top {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
 
-        .card-img-top {
-            width: 300px;
-            height: 300px;
-            margin: 0 auto;
-            display: block;
-        }
+    .card-title {
+        font-size: 28px;
+        color: #060542;
+    }
 
-        .card-title {
-            font-size: 28px;
-            color: #060542;
-        }
+    .card-body {
+        /*padding: 1.25rem;*/
+    }
 
-        .card-body {
-            padding: 1.25rem;
-        }
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .card:hover {
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    .btn-primaryL {
+        background-color: rgb(224, 243, 247);
+        color: black;
+        margin-right: 10px;
+    }
 
-    <section class="jumbotron" style="text-align: left; background-color: #C4D0E8; padding: 20px 30px; ">
-        <div class="container">
-            <h1 style="margin: 20px 0 0;">@ViewBag.CategoryName</h1>
-        </div>
-    </section>
+    .btn-primaryL:hover {
+        background-color: #5A65C8;
+    }
+</style>
 
-    <div class="album py-5 d-flex justify-content-center">
-        <div class="container">
-
-            <div class="row">
-                @foreach (var item in Model)
-			{
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">@ViewBag.CategoryName</h1>
+    </div>
+</section>
+<div class="album py-5 d-flex justify-content-center">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
                 <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <div class="card-body">
-                            <p class="card-text">@item.Title</p>
-                            <p class="card-text text"><strong>Ціна: @item.Price грн</strong></p>
-                            <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id" class="stretched-link"></a>
-                            @* <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-info m-1" role="button">Переглянути</a> *@
+                    @*<img src="~/img/products/@item.ImageFileName" class="img-thumbnail card-img-top" />*@
+                    <div class="card mb-4 box-shadow w-300">
+                        <div class="card-body" style="padding:1px;">
+                            <img src="~/img/products/@item.ImageFileName" class="img-thumbnail card-img-top" />
+                            <center>
+                                <p class="card-text" style="font-size: 18px; margin: 10px 10px 0 10px"><strong class="fw-bold">@item.Title</strong></p>
+                            </center> <hr>
+                            <div style="margin-left:5px">
+                                <p class="card-text text"><strong>Ціна:</strong> @item.Price грн</p>
+                                <p class="card-text"><strong>Наявність:</strong> @item.ItemsAvailable</p>
+
+                            </div>
+
+                            @*<a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-primary " style="margin: 0 5px 5px 0;" role="button">Переглянути</a>*@
+                            <div class="d-flex justify-content-end align-items-end" style="height: 100%;">
+                                <a href="@Url.Action("Index", "ProductDetail", new { id = item.Id })" class="btn btn-primaryL " style="margin: 0 5px 5px 0;" role="button">Переглянути</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-			}
+                @*    <div class="card">
+            <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id" class="stretched-link"></a>
+            <img class="card-img-top" src="~/img/products/@item.ImageFileName" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Ціна: @item.Price грн</p>
             </div>
+            </div> *@
+            }
         </div>
     </div>
+</div>
