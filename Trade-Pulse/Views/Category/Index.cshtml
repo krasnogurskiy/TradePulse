@@ -37,12 +37,11 @@
         }
     </style>
 
-    <section class="jumbotron" style="text-align: left; background-color: #C4D0E8; padding: 20px 30px; ">
+    <section class="jumbotron" style="text-align: center; background-color: #C4D0E8; margin-top: 10px; padding: 20px 30px; ">
         <div class="container">
-            <h1 style="margin: 20px 0 0;">Категорії</h1>
+            <h1 style="">Категорії</h1>
         </div>
     </section>
-
 
 
     <div class="album py-5 d-flex justify-content-center">
@@ -50,8 +49,8 @@
             <div class="row">
                 @foreach (var item in Model)
             {
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
+                <div class="col-md-3">
+                    <div class="card mb-3 box-shadow">
                         <img class="card-img-top" src="~/img/@item.ImageFileName" alt=@item.Title>
                         <div class="card-body text-center">
                             <p class="card-title">@item.Title</p>
