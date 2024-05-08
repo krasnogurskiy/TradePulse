@@ -4,50 +4,146 @@
     ViewData["Title"] = "Cart";
 }
 
-<h1>Корзина</h1>
+<style>
+    body {
+        background-color: #C4D0E8;
+    }
+    .cart-wrapper {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 50px;
+        margin-top: 20px;
+        margin-bottom: 200px;
+    }
 
-@if (Model.Count == 0)
-{
-    <p>Ваша корзина порожня</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Товар</th>
-                <th>Ціна</th>
-                <th>Кількість</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.ProductTitle</td>
-                    <td>@item.Price / шт.</td>
-                    <td>@item.ItemsCount</td>
-                    <td>
-                        <div class="row">
-                            <div class="col-6">
-                                <form asp-action="RemoveFromCart" asp-controller="Cart">
-                                    <input type="hidden" name="id" value="@item.ProductId" />
-                                    <button type="submit" class="btn btn-danger">Видалити з корзини</button>
-                                </form>
-                            </div>
-                            <div class="col-6">
-                                <form asp-action="Create" asp-controller="Order" method="post">
-                                    <input type="hidden" name="Price" value="@item.Price" />
-                                    <input type="hidden" name="ProductId" value="@item.ProductId" />
-                                    <input type="hidden" name="ItemsCount" value="@item.ItemsCount " />
-                                    <button type="submit" class="btn btn-success">Замовити</button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    .order-button {
+        border-radius: 40px 0px 0px 0px;
+        background: #060542;
+        color: #FFFFFF;
+    }
+</style>
+
+<div class="cart-wrapper">
+	<section class="jumbotron" style="text-align: center; color: #060542; padding: 20px 30px; ">
+		<div class="container">
+			<h1>Корзина</h1>
+		</div>
+	</section>
+	
+	@if (Model.Count == 0)
+	{
+		<div style="text-align: center;">
+			<p>Ваша корзина порожня</p>
+		</div>
+	}
+	else
+	{
+		<table class="table">
+		<thead>
+		<tr>
+			<th>Товар</th>
+			<th>Ціна</th>
+			<th>Кількість</th>
+			<th>Загальна ціна</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.ProductTitle</td>
+				<td>@(item.Price.ToString("0.00")) / шт.</td>
+				<td>
+					<div class="quantity">
+						<button class="btn btn-sm btn-secondary" onclick="decreaseQuantity(@item.ProductId, @item.Price)">-</button>
+						<span id="quantity_@item.ProductId">@item.ItemsCount</span>
+						<button class="btn btn-sm btn-secondary" onclick="increaseQuantity(@item.ProductId, @item.Price)">+</button>
+					</div>
+				</td>
+				<td id="totalPrice_@item.ProductId">@((item.Price * item.ItemsCount).ToString("0.00"))</td>
+				<td>
+					<div class="row">
+						<div class="col-6">
+							<form asp-action="RemoveFromCart" asp-controller="Cart">
+								<input type="hidden" name="id" value="@item.ProductId"/>
+								<button type="submit" class="btn btn-danger btn-sm">Видалити</button>
+							</form>
+						</div>
+					</div>
+				</td>
+			</tr>
+		}
+		</tbody>
+		</table>
+
+		<div style="display: flex; justify-content: space-between; margin-left: 20px; margin-right: 100px; margin-bottom: 20px;">
+			<div>
+				<h4 style="margin-top: 27px;">
+					Загальна вартість всіх товарів:
+					<span id="totalOrderPrice">@Model.Sum(item => item.Price * item.ItemsCount).ToString("0.00")</span>
+				</h4>
+			</div>
+			<div class="text-center" style="margin-top: 20px;">
+				<form asp-action="Create" asp-controller="Order" method="post">
+					@foreach (var item in Model)
+					{
+						<input type="hidden" name="Products[@item.ProductId].Price" value="@item.Price"/>
+						<input type="hidden" name="Products[@item.ProductId].ProductId" value="@item.ProductId"/>
+						<input type="hidden" name="Products[@item.ProductId].ItemsCount" value="@item.ItemsCount"/>
+					}
+					<button type="submit" class="btn btn-success order-button"
+					        style="width: 300px; height: 60px; border-radius: 40px; background-color: #060542; color: #FFFFFF;"
+					        onmouseover="this.style.backgroundColor='#063f69'; this.style.color='#FFFFFF';"
+					        onmouseout="this.style.backgroundColor='#060542'; this.style.color='#FFFFFF';">
+						Перейти до оформлення замовлення
+					</button>
+				</form>
+			</div>
+		</div>
+	}
+</div>
+
+
+<script>
+    function decreaseQuantity(productId, pricePerUnit) {
+        var quantityElement = document.getElementById("quantity_" + productId);
+        var currentQuantity = parseInt(quantityElement.innerHTML);
+
+        if (currentQuantity > 1) {
+            quantityElement.innerHTML = currentQuantity - 1;
+            updateTotalPrice(productId, currentQuantity - 1, pricePerUnit);
+            updateTotalOrderPrice();
+        }
+    }
+
+    function increaseQuantity(productId, pricePerUnit) {
+        var quantityElement = document.getElementById("quantity_" + productId);
+        var currentQuantity = parseInt(quantityElement.innerHTML);
+
+        // Тут ви можете виконати перевірку, чи не перевищує нова кількість обмеження
+        // Наприклад, перевірте змінну, що містить максимальну допустиму кількість товару
+        // Якщо потрібно, ви можете взяти це значення з сервера або зберігати його як додатковий атрибут на елементі
+
+        quantityElement.innerHTML = currentQuantity + 1;
+        updateTotalPrice(productId, currentQuantity + 1, pricePerUnit);
+        updateTotalOrderPrice();
+    }
+
+    function updateTotalPrice(productId, quantity, pricePerUnit) {
+        var priceElement = document.getElementById("totalPrice_" + productId);
+        var newTotalPrice = pricePerUnit * quantity;
+        priceElement.innerHTML = newTotalPrice.toLocaleString('uk-UA', { minimumFractionDigits: 2 });
+    }
+
+    function updateTotalOrderPrice() {
+        var totalOrderPriceElement = document.getElementById("totalOrderPrice");
+        var totalOrderPrice = 0;
+        var priceElements = document.querySelectorAll("[id^='totalPrice_']");
+        priceElements.forEach(function (element) {
+            totalOrderPrice += parseFloat(element.innerHTML);
+        });
+        totalOrderPriceElement.innerHTML = totalOrderPrice.toFixed(2);
+    }
+</script>
